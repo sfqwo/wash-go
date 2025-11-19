@@ -1,0 +1,55 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  @include fadeInUp();
+}
+
+.label {
+  position: absolute;
+  left: $spacing-sm;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  background-color: $color-background;
+  padding: 0 $spacing-xs;
+
+  &_required {
+    color: $color-error;
+    margin-left: 0.25rem;
+  }
+}
+
+.input-base {
+  box-sizing: border-box;
+  padding: $spacing-sm $spacing-sm;
+  font-size: $font-size-md;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  outline: none;
+  background-color: $color-background;
+  color: $color-text-secondary;
+  width: 100%;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.2);
+  }
+
+  &:focus + .label,
+  &[type=date] + .label,
+  &[data-filled="true"] + .label,
+  &:placeholder-shown + .label {
+    top: -8px;
+    left: 0;
+    font-size: $font-size-sm;
+    color: $color-primary;
+  }
+}

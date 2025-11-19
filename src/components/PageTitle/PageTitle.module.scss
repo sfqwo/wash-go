@@ -1,0 +1,43 @@
+
+.root {
+  max-width: 1200px;
+  margin: 0 auto var(--spacing-xl);
+  animation: titleShine 0.8s ease-out;
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  user-select: none;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  text-align: center;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: var(--font-size-xxl);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@keyframes titleShine {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}

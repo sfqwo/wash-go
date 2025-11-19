@@ -1,0 +1,53 @@
+@use "../_field.scss" as *;
+@use "../_variables.scss" as vars;
+
+.root {
+  @extend .field;
+}
+
+.selectControl {
+  @extend .input-base;
+}
+
+.label {
+  @extend .label;
+}
+
+.selectControl {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: vars.$spacing-sm;
+  border: 1px solid vars.$color-border;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: vars.$color-background;
+  color: vars.$color-text-secondary;
+}
+
+.dropdown {
+  background-color: vars.$color-background;
+  border-radius: vars.$radius-md;
+  border: 1px solid vars.$color-border;
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: vars.$spacing-sm;
+  border: 1px solid vars.$color-background;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover, &:active {
+    background-color: rgba(0, 191, 255, 0.08);
+    color: vars.$color-primary;
+    border: none;
+    outline: none;
+  }
+}

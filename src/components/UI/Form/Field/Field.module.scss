@@ -1,0 +1,9 @@
+@use "../_field.scss" as *;
+
+.input {
+  @extend .input-base;
+}
+
+.label {
+  @extend .label;
+}

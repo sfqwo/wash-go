@@ -1,0 +1,253 @@
+.root {
+  padding: 0;
+
+  &>div {
+    margin: 0;
+    max-width: 100vw;
+    height: 80vh;
+  }
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.7s ease-in-out;
+  opacity: 0;
+
+  &Active {
+    opacity: 1;
+    animation: slideIn 0.7s ease-out;
+  }
+
+  &Background {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &Overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.85;
+  }
+
+  &.blue {
+    background: linear-gradient(135deg, var(--color-primary), #1e40af);
+  }
+
+  &.green {
+    background: linear-gradient(135deg, #059669, #047857);
+  }
+
+  &.purple {
+    background: linear-gradient(135deg, #9333ea, #7e22ce);
+  }
+
+  &Content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 70vw;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-background);
+    animation: contentFadeIn 0.8s ease-out 0.2s both;
+  }
+}
+
+.subtitle {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+  opacity: 0.95;
+  animation: float 3s ease-in-out infinite;
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.description {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-xl);
+  opacity: 0.95;
+}
+
+.ctaButton {
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px var(--color-shadow);
+
+  &:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 15px var(--color-shadow-hover);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: var(--color-background);
+  opacity: 0.85;
+  border: none;
+  padding: var(--spacing-md);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px var(--color-shadow-light);
+
+  &:hover {
+    background: var(--color-background);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &.prev {
+    left: 1rem;
+    animation: bounceLeft 2s ease-in-out infinite;
+  }
+
+  &.next {
+    right: 1rem;
+    animation: bounceRight 2s ease-in-out infinite;
+  }
+}
+
+
+.dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-background);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--color-background);
+    opacity: 0.75;
+    transform: scale(1.2);
+  }
+
+  &.active {
+    background: var(--color-background);
+    opacity: 1;
+    width: 2rem;
+    border-radius: 1rem;
+    animation: dotPulse 1s ease-in-out infinite;
+  }
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .title {
+    font-size: var(--font-size-xxl);
+  }
+}
+
+@keyframes bounceLeft {
+
+  0%,
+  100% {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-50%) translateX(-5px);
+  }
+}
+
+@keyframes bounceRight {
+
+  0%,
+  100% {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-50%) translateX(5px);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dotPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0);
+  }
+}
