@@ -1,8 +1,9 @@
-import styles from './Section.module.scss';
 import clsx from "clsx";
-import { ISection } from "./types";
 
-export const Section = ({ className, children, as: Tag = 'section', bg = 'white', ...rest }: ISection) => {
+import styles from "./Section.module.scss";
+import type { ISection } from "./types";
+
+export const Section = ({ className, children, as: Tag = "section", bg = "white", ...rest }: ISection) => {
   const clsxRoot = clsx(styles.root, className, styles[bg]);
 
   return (
@@ -12,4 +13,4 @@ export const Section = ({ className, children, as: Tag = 'section', bg = 'white'
     </div>
   </Tag>
 );
-}
+};

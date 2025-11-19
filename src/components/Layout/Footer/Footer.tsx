@@ -1,7 +1,9 @@
 import Link from "next/link";
 
 import { Section } from "@/components/Section";
+
 import { navigation, socialMedia, contacts } from "../constants";
+
 import styles from "./Footer.module.scss";
 
 export function Footer() {

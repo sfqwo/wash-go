@@ -1,1 +1,1 @@
-export * from './WashingMachine';
+export * from "./WashingMachine";

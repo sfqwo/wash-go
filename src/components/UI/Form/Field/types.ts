@@ -1,19 +1,22 @@
-import { HTMLAttributes, LabelHTMLAttributes, PropsWithChildren } from "react";
-import { TBaseInputProps, TBaseInputTag, TBaseInputRef } from "../BaseInput/types";
+import type { LabelHTMLAttributes } from "react";
+
+import type {
+  TBaseInputProps, TBaseInputTag, TBaseInputRef,
+} from "../BaseInput/types";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
 export type TFieldTag = TBaseInputTag;
 
-export type TFieldLabel =  {
+export type TFieldLabel = {
   text: string;
   error?: string;
   isError?: boolean;
 }
 
-export type TFieldBaseLabel =  string;
+export type TFieldBaseLabel = string;
 
-export type TFieldProps<T extends TFieldTag> = Optional<TBaseInputProps<T>, 'tag'> & {
+export type TFieldProps<T extends TFieldTag> = Optional<TBaseInputProps<T>, "tag"> & {
   label: TFieldBaseLabel | TFieldLabel;
 }
 
@@ -26,4 +29,4 @@ export interface TFieldLabelCombinedProps extends TFieldLabelProps {
   value: TFieldLabel;
 }
 
-export type TFieldRef<T extends TFieldTag = 'input'> = TBaseInputRef<T>;
+export type TFieldRef<T extends TFieldTag = "input"> = TBaseInputRef<T>;

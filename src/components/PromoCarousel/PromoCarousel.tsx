@@ -1,9 +1,10 @@
-'use client'
-import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+"use client";
 import clsx from "clsx";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 import { Section } from "../Section";
+
 import styles from "./PromoCarousel.module.scss";
 
 const slides = [
@@ -79,7 +80,7 @@ export function PromoCarousel() {
               <button className={styles.ctaButton}>{slide.cta}</button>
             </div>
           </div>
-        )
+        );
       })}
 
       <button
@@ -100,7 +101,7 @@ export function PromoCarousel() {
 
       <div className={styles.dots}>
         {slides.map((_, index) => {
-          const clsxDot = clsx(styles.dot, { [styles.active]: index === currentSlide })
+          const clsxDot = clsx(styles.dot, { [styles.active]: index === currentSlide });
           const handleGoToSlide = () => goToSlide(index);
           const label = `Go to slide ${index + 1}`;
 
@@ -111,7 +112,7 @@ export function PromoCarousel() {
               className={clsxDot}
               aria-label={label}
             />
-          )
+          );
         })}
       </div>
     </Section>

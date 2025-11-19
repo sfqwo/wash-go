@@ -1,11 +1,12 @@
 import { Mail, MapPin, Phone, Facebook, Instagram, Twitter } from "lucide-react";
+
 import type { ILink } from "./types";
 
-export const PHONE = '(555)123-4567';
-export const EMAIL = 'info@freshwash.com';
-export const ADDRESS = '123 Main Street, New York, NY 10001';
+export const PHONE = "(555)123-4567";
+export const EMAIL = "info@freshwash.com";
+export const ADDRESS = "123 Main Street, New York, NY 10001";
 
-const ADDRESS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`
+const ADDRESS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
 
 export const contacts = [
   {

@@ -1,12 +1,13 @@
-import { WashingMachine } from "@/components/WashingMachine";
-import styles from "./page.module.scss";
-import { Services } from "@/components/Services";
-import { PageTitle } from "@/components/PageTitle/PageTitle";
 import { Page } from "@/components/Page";
+import { PageTitle } from "@/components/PageTitle/PageTitle";
 import { Section } from "@/components/Section";
+import { Services } from "@/components/Services";
+import { WashingMachine } from "@/components/WashingMachine";
 
-export const TITLE = 'Our Services';
-export const SUBTITLE = 'Professional laundry care with state-of-the-art equipment and eco-friendly detergents';
+import styles from "./page.module.scss";
+
+export const TITLE = "Our Services";
+export const SUBTITLE = "Professional laundry care with state-of-the-art equipment and eco-friendly detergents";
 
 export default function ServicesPage() {
   return (

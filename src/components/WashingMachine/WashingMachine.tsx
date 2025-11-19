@@ -1,6 +1,6 @@
-'use client';
-import { useState } from "react";
+"use client";
 import clsx from "clsx";
+import { useState } from "react";
 
 import styles from "./WashingMachine.module.scss";
 
@@ -17,12 +17,12 @@ export function WashingMachine() {
     styles.button_start,
     { [styles.button_disabled]: disabledStart },
   );
-
   const clsxButtonStop = clsx(
     styles.button,
     styles.button_stop,
     { [styles.button_disabled]: disabledStop },
   );
+  const clsxDrum = clsx(styles.drum, { [styles.drumRunning]: isRunning });
 
   const handleChangeMachineState = () => setIsRunning((running) => !running);
 
@@ -50,11 +50,12 @@ export function WashingMachine() {
         </div>
 
         <div className={styles.window}>
-          <div className={`${styles.drum} ${isRunning ? styles.drumRunning : ''}`}>
+          <div className={clsxDrum}>
             <div className={styles.clothes}>
               {Array.from(Array(CLOTHES_COUNT).keys()).map((_, index) => {
-                const clsxCloth = clsx(styles.cloth, styles[`cloth${index + 1}`], { [styles.clothRunning]: isRunning });
-                return <div className={clsxCloth} />
+                const key = `cloth${index + 1}`;
+                const clsxCloth = clsx(styles.cloth, styles[key], { [styles.clothRunning]: isRunning });
+                return <div key={key} className={clsxCloth} />;
               })}
             </div>
           </div>
@@ -64,8 +65,9 @@ export function WashingMachine() {
               <div className={styles.water} />
               <div className={styles.bubbles}>
                 {Array.from(Array(BUBBLES_COUNT).keys()).map((_, index) => {
-                  const clsxBuble = clsx(styles.bubble, styles[`bubble${index + 1}`]);
-                  return <div className={clsxBuble} />
+                  const key = `bubble${index + 1}`;
+                  const clsxBuble = clsx(styles.bubble, styles[key]);
+                  return <div key={key} className={clsxBuble} />;
                 })}
               </div>
             </>

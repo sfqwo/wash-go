@@ -1,9 +1,11 @@
 import { Award, Sparkles, TrendingDown } from "lucide-react";
-import styles from "./page.module.scss";
-import { Pricing } from "@/components/Pricing";
-import { PageTitle } from "@/components/PageTitle/PageTitle";
+
 import { Page } from "@/components/Page";
+import { PageTitle } from "@/components/PageTitle/PageTitle";
+import { Pricing } from "@/components/Pricing";
 import { Section } from "@/components/Section";
+
+import styles from "./page.module.scss";
 
 const TITLE = "Simple, Transparent Pricing";
 const SUBTITLE = "Choose the plan that fits your lifestyle. No hidden fees, ever.";

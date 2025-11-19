@@ -1,10 +1,11 @@
 "use client";
 
-import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
+import * as React from "react";
 
-import styles from './Dialog.module.scss';
+import styles from "./Dialog.module.scss";
+import type { IDialog, IDialogContent } from "./types";
 
 function DialogRoot({
   ...props
@@ -49,9 +50,7 @@ function DialogContent({
   title,
   description,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  description: string
-}) {
+}: IDialogContent) {
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
@@ -60,10 +59,12 @@ function DialogContent({
         className={className}
         {...props}
       >
-        <DialogPrimitive.Title>{title}</DialogPrimitive.Title>
-        <DialogPrimitive.Description className={styles.description}>
+        <DialogTitle>{title}</DialogTitle>
+
+        <DialogDescription className={styles.description}>
           {description}
-        </DialogPrimitive.Description>
+        </DialogDescription>
+
         {children}
         <DialogPrimitive.Close className={styles.close}>
           <XIcon />
@@ -119,16 +120,24 @@ function DialogDescription({
   );
 }
 
-function Dialog({ defaultOpen, children, title = "", description, content }: any) {
+function Dialog({
+  defaultOpen = false,
+  children,
+  title = "",
+  description,
+  content,
+}: IDialog) {
   return (
     <DialogRoot defaultOpen={defaultOpen}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
 
       <DialogPortal>
         <DialogOverlay className={styles.overlay} />
-        <DialogContent className={styles.modal} title={title} description={description}>
+        <DialogContent
+          className={styles.modal}
+          title={title}
+          description={description}
+        >
           {content}
         </DialogContent>
       </DialogPortal>

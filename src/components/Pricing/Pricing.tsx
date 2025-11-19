@@ -1,17 +1,18 @@
 "use client";
+import clsx from "clsx";
 import { Check } from "lucide-react";
 import { useForm } from "react-hook-form";
 
-import styles from "./Pricing.module.scss";
-import clsx from "clsx";
-import { SectionTitle } from "../SectionTitle";
 import { Section } from "../Section";
+import { SectionTitle } from "../SectionTitle";
+import Button from "../UI/Button";
 import { Dialog } from "../UI/Dialog";
 import { Field } from "../UI/Form";
-import Button from "../UI/Button";
 
-const TITLE = 'Simple, Transparent Pricing';
-const SUBTITLE = 'Choose the plan that works best for you';
+import styles from "./Pricing.module.scss";
+
+const TITLE = "Simple, Transparent Pricing";
+const SUBTITLE = "Choose the plan that works best for you";
 
 const plans = [
   {
@@ -72,46 +73,50 @@ const PricingItemModalContent = () => {
     reset,
   } = useForm<TPricingFormData>();
 
-  const onSubmit = (data: TPricingFormData) => {
-    console.log("submitted:", data);
+  const onSubmit = () => {
     reset();
   };
+  const submitHandler = () => {
+    handleSubmit(onSubmit);
+  };
 
-  return <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-    <Field
-      id="name"
-      label={{
-        text: "Name",
-        isError: !!errors?.name?.message,
-        error: errors?.name?.message,
-      }}
-      type="text"
-      {...register("name", { required: "Name is required" })}
-    />
+  return (
+    <form onSubmit={submitHandler} className={styles.form}>
+      <Field
+        id="name"
+        label={{
+          text: "Name",
+          isError: !!errors?.name?.message,
+          error: errors?.name?.message,
+        }}
+        type="text"
+        {...register("name", { required: "Name is required" })}
+      />
 
-    <Field
-      id="email"
-      type="email"
-      label={{
-        text: "E-mail",
-        isError: !!errors?.email?.message,
-        error: errors?.email?.message,
-      }}
-      {...register("email", {
-        required: "Email is required",
-        pattern: {
-          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-          message: "Invalid email address",
-        },
-      })}
-    />
+      <Field
+        id="email"
+        type="email"
+        label={{
+          text: "E-mail",
+          isError: !!errors?.email?.message,
+          error: errors?.email?.message,
+        }}
+        {...register("email", {
+          required: "Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
+      />
 
-    <Button type="submit">Send</Button>
-  </form>
-}
+      <Button type="submit">Send</Button>
+    </form>
+  );
+};
 
-const PricingItemModal = ({ popular }: Pick<typeof plans[0], 'popular'>) => {
-  const variant = popular ? 'primary' : 'secondary';
+const PricingItemModal = ({ popular }: Pick<typeof plans[0], "popular">) => {
+  const variant = popular ? "primary" : "secondary";
   return (
     <Dialog
       title="Get started with your laundry plan"
@@ -129,10 +134,7 @@ const PricingItem = ({
   const clsxRoot = clsx(styles.card, { [styles.popular]: popular });
 
   return (
-    <div
-      key={name}
-      className={clsxRoot}
-    >
+    <div key={name} className={clsxRoot}>
       {popular ? (
         <div className={styles.badge}>Most Popular</div>
       ) : null}

@@ -2,10 +2,11 @@ import { Calendar, Package, Sparkles, Home } from "lucide-react";
 
 import { Section } from "../Section";
 import { SectionTitle } from "../SectionTitle";
+
 import styles from "./HowItWorks.module.scss";
 
-const TITLE = 'How It Works';
-const SUBTITLE = 'Four simple steps to fresh, clean laundry';
+const TITLE = "How It Works";
+const SUBTITLE = "Four simple steps to fresh, clean laundry";
 
 const steps = [
   {

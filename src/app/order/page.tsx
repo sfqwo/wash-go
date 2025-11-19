@@ -1,11 +1,14 @@
 "use client";
 
-import styles from "./page.module.scss";
+import { Clock, Shield, Sparkles, Truck } from "lucide-react";
+
 import { OrderForm } from "@/components/OrderForm";
 import { Page } from "@/components/Page";
 import { PageTitle } from "@/components/PageTitle/PageTitle";
 import { Section } from "@/components/Section";
-import { Clock, Shield, Sparkles, Truck } from "lucide-react";
+
+import styles from "./page.module.scss";
+
 
 const TITLE = "Schedule Your Pickup";
 const SUBTITLE = "Free pickup and delivery • Same-day service available • 100% satisfaction guaranteed";
@@ -41,7 +44,7 @@ export default function OrderPage() {
         
         <div className={styles.benefits}>
           {benefits.map(({ title, description, icon: Icon }) => (
-            <div className={styles.benefit}>
+            <div className={styles.benefit} key={title}>
               <div className={styles.benefitIcon}>
                 <Icon />
               </div>

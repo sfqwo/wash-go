@@ -1,10 +1,15 @@
-import styles from "./Field.module.scss";
-import { TFieldProps, TFieldLabelProps, TFieldRef, TFieldTag, TFieldLabelCombinedProps } from "./types";
-import { ForwardedRef, forwardRef, ChangeEvent } from "react";
-import BaseInput from "../BaseInput";
 import clsx from "clsx";
+import { forwardRef } from "react";
+import type { ForwardedRef, ChangeEvent } from "react";
 
-const LabelRequiredSymbol = ({ required }: Pick<TFieldLabelProps, 'required'>) => {
+import BaseInput from "../BaseInput";
+
+import styles from "./Field.module.scss";
+import type {
+  TFieldProps, TFieldLabelProps, TFieldRef, TFieldTag, TFieldLabelCombinedProps,
+} from "./types";
+
+const LabelRequiredSymbol = ({ required }: Pick<TFieldLabelProps, "required">) => {
   if (!required) return null;
   return <span className={styles.label_required}>*</span>;
 };
@@ -38,7 +43,7 @@ export const Label = ({
   ...labelAttributes
 }: TFieldLabelProps) => {
   if (!value) return null;
-  const isSimpleLabel = typeof value === 'string';
+  const isSimpleLabel = typeof value === "string";
 
   if (isSimpleLabel) {
     return (
@@ -59,8 +64,8 @@ export const Label = ({
   );
 };
 
-export const Field = forwardRef(<T extends TFieldTag = 'input'>({
-  label, tag = 'input', className, required, onChange, ...props
+export const Field = forwardRef(<T extends TFieldTag = "input">({
+  label, tag = "input", className, required, onChange, ...props
 }: TFieldProps<T>, ref?: ForwardedRef<TFieldRef<T>>) => {
   const clsxRoot = clsx(styles.input, className);
 
@@ -68,7 +73,7 @@ export const Field = forwardRef(<T extends TFieldTag = 'input'>({
     const filled = !!e.target.value.trim();
     e.target.dataset.filled = String(filled);
     onChange?.(e);
-  }
+  };
 
   return (
     <BaseInput
@@ -81,12 +86,12 @@ export const Field = forwardRef(<T extends TFieldTag = 'input'>({
     >
       <Label htmlFor={props.id} required={required} value={label} className={styles.label} />
     </BaseInput>
-  )
+  );
 });
 
-Field.displayName = '@UI/Form/Field';
+Field.displayName = "@UI/Form/Field";
 
-export default Field as <T extends TFieldTag = 'input'>(
+export default Field as <T extends TFieldTag = "input">(
   props: TFieldProps<T> & {
     ref?: ForwardedRef<TFieldRef<T>>;
   },

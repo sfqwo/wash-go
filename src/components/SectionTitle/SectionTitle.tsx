@@ -1,5 +1,5 @@
-import type { ISectionTitleProps } from './types';
-import styles from './SectionTitle.module.scss';
+import styles from "./SectionTitle.module.scss";
+import type { ISectionTitleProps } from "./types";
 
 export const SectionTitle = ({ title, subtitle }: ISectionTitleProps) => (
   <div className={styles.root}>
@@ -8,4 +8,4 @@ export const SectionTitle = ({ title, subtitle }: ISectionTitleProps) => (
       {subtitle}
     </p>
   </div>
-) 
+); 

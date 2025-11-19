@@ -1,7 +1,7 @@
-import type { HTMLAttributes, PropsWithChildren } from "react";
 import clsx from "clsx";
+import type { HTMLAttributes, PropsWithChildren } from "react";
 
-import styles from './Page.module.scss';
+import styles from "./Page.module.scss";
 
 export const Page = ({ children, className, ...rest }: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => {
   const clsxRoot = clsx(styles.root, className);
@@ -9,4 +9,4 @@ export const Page = ({ children, className, ...rest }: PropsWithChildren<HTMLAtt
   return (
     <div className={clsxRoot} {...rest}>{children}</div>
   );
-}
+};

@@ -1,10 +1,12 @@
 import { Shirt, Wind, Sparkles, Package, Clock, Shield } from "lucide-react";
-import styles from "./Services.module.scss";
-import { SectionTitle } from "../SectionTitle";
-import { Section } from "../Section";
 
-const TITLE = 'Our Services';
-const SUBTITLE = 'Comprehensive laundry solutions tailored to your needs';
+import { Section } from "../Section";
+import { SectionTitle } from "../SectionTitle";
+
+import styles from "./Services.module.scss";
+
+const TITLE = "Our Services";
+const SUBTITLE = "Comprehensive laundry solutions tailored to your needs";
 
 const services = [
   {

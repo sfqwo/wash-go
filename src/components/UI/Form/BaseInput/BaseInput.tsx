@@ -2,20 +2,20 @@ import clsx from "clsx";
 import { forwardRef } from "react";
 import type { Ref, ForwardedRef } from "react";
 
-import type { TBaseInputProps, TBaseInputRef, TBaseInputTag } from "./types";
-import { isInput, isTextarea } from "./typeGuards";
 import styles from "./BaseInput.module.scss";
+import { isInput, isTextarea } from "./typeGuards";
+import type { TBaseInputProps, TBaseInputRef, TBaseInputTag } from "./types";
 
-const BaseInput = forwardRef(<T extends TBaseInputTag = 'input'>(
+const BaseInput = forwardRef(<T extends TBaseInputTag = "input">(
   props: TBaseInputProps<T>, ref?: Ref<TBaseInputRef<T>>,
 ) => {
   const clsxRoot = clsx(styles.root, props.hidden && styles.hidden);
 
   if (isInput(props)) {
     const {
-      tag: Tag = 'input',
+      tag: Tag = "input",
       type = "text",
-      id = 'input',
+      id = "input",
       children,
       ...rest
     } = props;
@@ -31,13 +31,13 @@ const BaseInput = forwardRef(<T extends TBaseInputTag = 'input'>(
         />
         {children}
       </div>
-    )
+    );
   }
 
   if (isTextarea(props)) {
     const {
-      tag: Tag = 'textarea',
-      id = 'textarea',
+      tag: Tag = "textarea",
+      id = "textarea",
       children,
       wrap = "soft",
       ...rest
@@ -54,16 +54,16 @@ const BaseInput = forwardRef(<T extends TBaseInputTag = 'input'>(
         />
         {children}
       </div>
-    )
+    );
   }
-  // eslint-disable-next-line no-console
+   
   console.error('BaseInput "Tag" mismatch');
   return null;
 });
 
-BaseInput.displayName = '@UI/Form/BaseInput';
+BaseInput.displayName = "@UI/Form/BaseInput";
 
-export default BaseInput as <T extends TBaseInputTag = 'input'>(
+export default BaseInput as <T extends TBaseInputTag = "input">(
   props: TBaseInputProps<T> & {
     ref?: ForwardedRef<TBaseInputRef<T>>;
   },

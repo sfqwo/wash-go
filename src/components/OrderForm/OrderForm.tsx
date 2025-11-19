@@ -1,17 +1,19 @@
 "use client";
+import clsx from "clsx";
+import { Shirt, Wind, Sparkles, Package } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Shirt, Wind, Sparkles, Package } from "lucide-react";
-import clsx from "clsx";
 
-import { Field, Select } from "../UI/Form";
 import { Section } from "../Section";
 import { SectionTitle } from "../SectionTitle";
-import type { OrderFormData } from "./types";
-import styles from "./OrderForm.module.scss";
 import Button from "../UI/Button";
+import { Field, Select } from "../UI/Form";
 
-const TITLE = 'Schedule Your Pickup';
+import styles from "./OrderForm.module.scss";
+import type { OrderFormData } from "./types";
+
+
+const TITLE = "Schedule Your Pickup";
 const SUBTITLE = "Fill out the form below and we'll pick up your laundry at your convenience. Free pickup and delivery!";
 
 const services = [
@@ -42,10 +44,10 @@ const services = [
 ];
 
 const pickupOptions = [
-  { value: 'default', label: 'Select time' },
-  { value: 'morning', label: 'Morning (8AM - 12PM)' },
-  { value: 'afternoon', label: 'Afternoon (12PM - 4PM)' },
-  { value: 'evening', label: 'Evening (4PM - 8PM)' },
+  { value: "default", label: "Select time" },
+  { value: "morning", label: "Morning (8AM - 12PM)" },
+  { value: "afternoon", label: "Afternoon (12PM - 4PM)" },
+  { value: "evening", label: "Evening (4PM - 8PM)" },
 ];
 
 export const OrderForm = () => {
@@ -58,10 +60,11 @@ export const OrderForm = () => {
     reset,
   } = useForm<OrderFormData>();
 
-  const onSubmit = (data: OrderFormData) => {
-    const orderData = { ...data, service: selectedService };
-    console.log("Order submitted:", orderData);
+  const onSubmit = () => {
     reset();
+  };
+  const submitHandler = () => {
+    handleSubmit(onSubmit);
   };
 
   const buttonText = selectedService ? "Schedule Pickup" : "Please Select a Service";
@@ -70,7 +73,7 @@ export const OrderForm = () => {
     <Section id="order-form" bg="gray">
       <SectionTitle title={TITLE} subtitle={SUBTITLE} />
 
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.root}>
+      <form onSubmit={submitHandler} className={styles.root}>
         <div className={styles.service}>
           <h3 className={styles.sectionLabel}>Select Your Service</h3>
           <div className={styles.serviceGrid}>
@@ -193,4 +196,4 @@ export const OrderForm = () => {
       </form>
     </Section>
   );
-}
+};

@@ -1,8 +1,8 @@
 "use client";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-import type { IDropdown } from "./types";
 import styles from "./Dropdown.module.scss";
+import type { IDropdown } from "./types";
 
 export function Dropdown({ children, content }: IDropdown) {
   return (

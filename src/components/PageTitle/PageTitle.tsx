@@ -1,5 +1,5 @@
-import type { IPageTitleProps } from './types';
-import styles from './PageTitle.module.scss';
+import styles from "./PageTitle.module.scss";
+import type { IPageTitleProps } from "./types";
 
 export const PageTitle = ({ title, subtitle }: IPageTitleProps) => (
   <div className={styles.root}>
@@ -8,4 +8,4 @@ export const PageTitle = ({ title, subtitle }: IPageTitleProps) => (
       {subtitle}
     </p>
   </div>
-) 
+); 

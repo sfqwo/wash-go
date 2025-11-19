@@ -1,11 +1,12 @@
-"use client"
+"use client";
+import * as RadixSelect from "@radix-ui/react-select";
 import { forwardRef, useRef, useState } from "react";
 import type { ChangeEvent, ForwardedRef } from "react";
-import * as RadixSelect from "@radix-ui/react-select";
 
-import type { ISelectProps } from "./types";
-import styles from "./Select.module.scss";
 import BaseInput from "../BaseInput";
+
+import styles from "./Select.module.scss";
+import type { ISelectProps } from "./types";
 
 const Select = forwardRef(({
   label, options, value: valueProp, onChange, ...props
@@ -24,7 +25,7 @@ const Select = forwardRef(({
     });
 
     rootRef.current.dispatchEvent(event);
-    onChange?.(event as unknown as ChangeEvent<HTMLInputElement | HTMLSelectElement>)
+    onChange?.(event as unknown as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
 
   return (
@@ -53,5 +54,5 @@ const Select = forwardRef(({
   );
 });
 
-Select.displayName = '@UI/Form/Select';
+Select.displayName = "@UI/Form/Select";
 export default Select;

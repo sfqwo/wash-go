@@ -1,25 +1,27 @@
-'use client';
+"use client";
 import clsx from "clsx";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
 
-import { Dropdown, DropdownItem } from "@/components/UI/Dropdown";
 import type { TPropsWithClassName } from "@/components/types";
+import { Dropdown, DropdownItem } from "@/components/UI/Dropdown";
+
 import { contacts, navigation } from "../constants";
 import type { ILink } from "../types";
+
 import styles from "./Header.module.scss";
 
 const HeaderNavigationLink = ({ id, title, ...props }: ILink) => {
   const pathname = usePathname();
   const isSelected = pathname.includes(id);
-  const clsxRoot = clsx(styles.navLink, { [styles.navLink_selected]: isSelected })
+  const clsxRoot = clsx(styles.navLink, { [styles.navLink_selected]: isSelected });
   return (
     <Link href={id} className={clsxRoot} {...props}>
       {title}
     </Link>
-  )
-}
+  );
+};
 
 const HeaderNavigationButton = () => (
   <Link href="/order#order-form" className={styles.bookButton}>Book Now</Link>
@@ -51,8 +53,8 @@ const HeaderMenu = ({ className }: TPropsWithClassName) => {
         <Menu />
       </button>
     </Dropdown>
-  )
-}
+  );
+};
 
 const HeaderNavigation = ({ className }: TPropsWithClassName) => {
   const clsxRoot = clsx(styles.nav, className);
@@ -71,8 +73,8 @@ const HeaderNavigation = ({ className }: TPropsWithClassName) => {
         <HeaderNavigationButton />
       </div>
     </nav>
-  )
-}
+  );
+};
 
 export function Header() {
   return (
