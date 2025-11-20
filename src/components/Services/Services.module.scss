@@ -10,7 +10,7 @@
   padding: var(--spacing-lg);
   box-shadow: 0 4px 6px var(--color-shadow-light);
   transition: all 0.3s ease;
-  animation: fadeInUp 0.6s ease-out both;
+  animation: none;
 
   @for $i from 1 through 6 {
     &:nth-child(#{$i}) {
@@ -62,6 +62,10 @@
     color: var(--color-primary);
     transition: color 0.4s ease;
   }
+}
+
+:global([data-section-visible="true"]) .card {
+  animation: fadeInUp 0.6s ease-out both;
 }
 
 @media (min-width: 768px) {

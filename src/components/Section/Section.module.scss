@@ -4,12 +4,18 @@
   text-align: center;
   padding: var(--spacing-lg);
   background: var(--color-background);
+  scroll-margin-top: 96px;
 }
 
 .content {
   margin: 0 auto;
   max-width: 1200px;
-  animation: fadeInDown 0.8s ease-out;
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.rootVisible .content {
+  animation: fadeInDown 0.8s ease-out forwards;
 }
 
 .gray {
@@ -30,6 +36,17 @@
 
 .black {
   background: var(--black-gradient);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    opacity: 1;
+    transform: none;
+  }
+
+  .rootVisible .content {
+    animation: none;
+  }
 }
 
 @media (min-width: 768px) {

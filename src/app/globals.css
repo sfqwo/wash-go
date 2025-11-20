@@ -58,6 +58,10 @@
   --container-width: 1200px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-primary);
   font-size: var(--font-size-base);

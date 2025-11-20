@@ -1,3 +1,15 @@
+:global([data-section-visible="true"]) .step {
+  animation: popIn 0.6s ease-out both;
+}
+
+:global([data-section-visible="true"]) .step+.step::after {
+  animation: line 2s ease-in-out forwards;
+}
+
+:global([data-section-visible="true"]) .stepIcon {
+  animation: pop 1s ease-in-out forwards;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -7,7 +19,8 @@
 .step {
   text-align: center;
   position: relative;
-  animation: popIn 0.6s ease-out both;
+  opacity: 0;
+  transform: scale(0.9);
 
   &+&::after {
     content: '';
@@ -17,9 +30,8 @@
     left: -7rem;
     width: 0;
     height: 2px;
-    opacity: 0;  
+    opacity: 0;
     background: linear-gradient(90deg, var(--color-primary-light), #8b5cf6);
-    animation: line 2s ease-in-out forwards;
   }
 
   @for $i from 1 through 4 {
@@ -79,9 +91,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 25px ar(--color-shadow-light);
+    box-shadow: 0 10px 25px var(--color-shadow-light);
     transition: all 0.4s ease;
-    animation: pop 1s ease-in-out;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: none;
 
     &>svg {
       width: 40px;

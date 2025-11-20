@@ -2,7 +2,7 @@
 .root {
   max-width: 1200px;
   margin: 0 auto var(--spacing-xl);
-  animation: fadeInScale 0.8s ease-out;
+  animation: none;
 }
 
 .title {
@@ -38,4 +38,8 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+:global([data-section-visible="true"]) .root {
+  animation: fadeInScale 0.8s ease-out;
 }

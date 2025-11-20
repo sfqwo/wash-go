@@ -7,7 +7,7 @@
 }
 
 .column {
-  animation: fadeInUp 0.6s ease-out both;
+  animation: none;
 
   @for $i from 1 through 4 {
     &:nth-child(#{$i}) {
@@ -33,7 +33,7 @@
       justify-content: center;
       font-size: var(--font-size-lg);
       margin-right: var(--spacing-md);
-      animation: spin 10s linear infinite;
+      animation: none;
     }
   }
 
@@ -90,7 +90,7 @@
   }
 
   &>svg {
-    animation: iconBounce 2s ease-in-out infinite;
+    animation: none;
   }
 }
 
@@ -143,16 +143,30 @@
   padding: 0;
   text-align: center;
   color: var(--color-text-secondary-light);
-  animation: fadeIn 1s ease-out;
+  animation: none;
 }
 
+:global([data-section-visible="true"]) .column {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+:global([data-section-visible="true"]) .columnHeadingIcon {
+  animation: spin 10s linear infinite;
+}
+
+:global([data-section-visible="true"]) .link>svg {
+  animation: iconBounce 2s ease-in-out infinite;
+}
+
+:global([data-section-visible="true"]) .copyright {
+  animation: fadeIn 1s ease-out;
+}
 
 @media (min-width: 640px) {
   .columnForm {
     flex-direction: row;
   }
 }
-
 
 @media (min-width: 768px) {
   .root {

@@ -7,7 +7,7 @@ import { Section } from "../Section";
 import { SectionTitle } from "../SectionTitle";
 import Button from "../UI/Button";
 import { Dialog } from "../UI/Dialog";
-import { Field } from "../UI/Form";
+import { Field, Select } from "../UI/Form";
 
 import styles from "./Pricing.module.scss";
 
@@ -16,7 +16,8 @@ const SUBTITLE = "Choose the plan that works best for you";
 
 const plans = [
   {
-    name: "Basic",
+    label: "Basic",
+    value: "basic",
     price: "$15",
     period: "per load",
     description: "Perfect for individuals",
@@ -29,7 +30,8 @@ const plans = [
     popular: false,
   },
   {
-    name: "Premium",
+    label: "Premium",
+    value: "premium",
     price: "$25",
     period: "per load",
     description: "Most popular choice",
@@ -44,7 +46,8 @@ const plans = [
     popular: true,
   },
   {
-    name: "Family",
+    label: "Family",
+    value: "family",
     price: "$99",
     period: "per month",
     description: "Best value for families",
@@ -60,9 +63,15 @@ const plans = [
   },
 ];
 
+const plansOptions = [
+  { value: "default", label: "Not selected" },
+  ...plans,
+];
+
 type TPricingFormData = {
   name: string;
   email: string;
+  plan: string;
 }
 
 const PricingItemModalContent = () => {
@@ -110,6 +119,13 @@ const PricingItemModalContent = () => {
         })}
       />
 
+      <Select
+        id="Plan"
+        label="Selected plan"
+        options={plansOptions}
+        {...register("plan", { required: "Plan is required" })}
+      />
+
       <Button type="submit">Send</Button>
     </form>
   );
@@ -129,17 +145,17 @@ const PricingItemModal = ({ popular }: Pick<typeof plans[0], "popular">) => {
 };
 
 const PricingItem = ({
-  name, description, price, period, popular, features,
+  label, description, price, period, popular, features,
 }: typeof plans[0]) => {
   const clsxRoot = clsx(styles.card, { [styles.popular]: popular });
 
   return (
-    <div key={name} className={clsxRoot}>
+    <div key={label} className={clsxRoot}>
       {popular ? (
         <div className={styles.badge}>Most Popular</div>
       ) : null}
       <div className={styles.cardHeader}>
-        <h3 className={styles.cardName}>{name}</h3>
+        <h3 className={styles.cardName}>{label}</h3>
         <p className={styles.cardDescription}>{description}</p>
         <div className={styles.priceWrapper}>
           <span className={styles.price}>{price}</span>
@@ -165,7 +181,7 @@ export function Pricing() {
       <SectionTitle title={TITLE} subtitle={SUBTITLE} />
 
       <div className={styles.root}>
-        {plans.map((plan) => <PricingItem key={plan.name} {...plan} />)}
+        {plans.map((plan) => <PricingItem key={plan.label} {...plan} />)}
       </div>
     </Section>
   );

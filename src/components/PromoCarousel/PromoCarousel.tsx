@@ -1,6 +1,8 @@
 "use client";
+
 import clsx from "clsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import { Section } from "../Section";
@@ -12,6 +14,7 @@ const slides = [
     title: "50% OFF First Order",
     subtitle: "Welcome to FreshWash!",
     description: "New customers get half off their first laundry service",
+    href: "/#order-form",
     cta: "Claim Offer",
     colorClass: "blue",
     image: "https://images.unsplash.com/photo-1761403460807-a89b7de9b4d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXVuZHJ5JTIwc2VydmljZSUyMGNsZWFufGVufDF8fHx8MTc2MjgzNjE2OHww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -21,6 +24,7 @@ const slides = [
     subtitle: "Same Day Service Available",
     description: "Schedule your pickup online and we'll handle the rest",
     cta: "Book Now",
+    href: "/#how-it-works",
     colorClass: "green",
     image: "https://images.unsplash.com/photo-1616757957712-6c8874a8c82b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZWxpdmVyeSUyMHNlcnZpY2V8ZW58MXx8fHwxNzYyODQ2NTM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
   },
@@ -29,6 +33,7 @@ const slides = [
     subtitle: "20% OFF This Week",
     description: "Professional care for your delicate garments",
     cta: "Learn More",
+    href: "/#services",
     colorClass: "purple",
     image: "https://images.unsplash.com/photo-1627564359646-5972788cec65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb2xkZWQlMjBjbGVhbiUyMGNsb3RoZXN8ZW58MXx8fHwxNzYyODUyNDA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
   },
@@ -77,7 +82,7 @@ export function PromoCarousel() {
               <p className={styles.subtitle}>{slide.subtitle}</p>
               <h2 className={styles.title}>{slide.title}</h2>
               <p className={styles.description}>{slide.description}</p>
-              <button className={styles.ctaButton}>{slide.cta}</button>
+              <Link href={slide.href} className={styles.ctaButton}>{slide.cta}</Link>
             </div>
           </div>
         );

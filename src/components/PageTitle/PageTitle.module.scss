@@ -2,7 +2,7 @@
 .root {
   max-width: 1200px;
   margin: 0 auto var(--spacing-xl);
-  animation: titleShine 0.8s ease-out;
+  animation: none;
 }
 
 .title {
@@ -40,4 +40,8 @@
   50% {
     background-position: 100% 50%;
   }
+}
+
+:global([data-section-visible="true"]) .root {
+  animation: titleShine 0.8s ease-out;
 }
