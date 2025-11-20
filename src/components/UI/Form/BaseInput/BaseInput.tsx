@@ -10,6 +10,8 @@ const BaseInput = forwardRef(<T extends TBaseInputTag = "input">(
   props: TBaseInputProps<T>, ref?: Ref<TBaseInputRef<T>>,
 ) => {
   const clsxRoot = clsx(styles.root, props.hidden && styles.hidden);
+  const resolvedValue = props.value ?? props.defaultValue;
+  const isFilled = !!resolvedValue && String(resolvedValue).trim().length > 0;
 
   if (isInput(props)) {
     const {
@@ -17,6 +19,7 @@ const BaseInput = forwardRef(<T extends TBaseInputTag = "input">(
       type = "text",
       id = "input",
       children,
+      defaultValue,
       ...rest
     } = props;
 
@@ -26,7 +29,8 @@ const BaseInput = forwardRef(<T extends TBaseInputTag = "input">(
           id={id}
           ref={ref as Ref<HTMLInputElement>}
           type={type}
-          data-filled={!!rest.value}
+          data-filled={isFilled}
+          defaultValue={defaultValue}
           {...rest}
         />
         {children}
@@ -40,6 +44,7 @@ const BaseInput = forwardRef(<T extends TBaseInputTag = "input">(
       id = "textarea",
       children,
       wrap = "soft",
+      defaultValue,
       ...rest
     } = props;
 
@@ -49,7 +54,8 @@ const BaseInput = forwardRef(<T extends TBaseInputTag = "input">(
           id={id}
           wrap={wrap}
           ref={ref as Ref<HTMLTextAreaElement>}
-          data-filled={!!rest.value}
+          data-filled={isFilled}
+          defaultValue={defaultValue}
           {...rest}
         />
         {children}

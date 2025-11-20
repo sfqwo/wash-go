@@ -7,12 +7,15 @@ import type { IDropdown } from "./types";
 export function Dropdown({ children, content }: IDropdown) {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        {children}
-      </DropdownMenu.Trigger>
-
+      <DropdownMenu.Trigger asChild>{children}</DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className={styles.content} sideOffset={10}>
+        <DropdownMenu.Content
+          align="end"
+          className={styles.content}
+          data-testid="dropdown-content"
+          aria-label="Dropdown content"
+          sideOffset={10}
+        >
           {content}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
@@ -25,4 +28,3 @@ export function DropdownItem({
 }: React.ComponentProps<typeof DropdownMenu.Item>) {
   return <DropdownMenu.Item asChild {...props} />;
 }
-

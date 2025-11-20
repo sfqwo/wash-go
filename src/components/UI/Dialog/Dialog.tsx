@@ -66,7 +66,7 @@ function DialogContent({
         </DialogDescription>
 
         {children}
-        <DialogPrimitive.Close className={styles.close}>
+        <DialogPrimitive.Close className={styles.close} aria-label="Close dialog">
           <XIcon />
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
