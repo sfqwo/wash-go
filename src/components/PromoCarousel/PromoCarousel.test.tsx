@@ -52,4 +52,22 @@ describe("PromoCarousel", () => {
     });
     expect(screen.getByRole("heading", { name: /premium dry cleaning/i })).toBeInTheDocument();
   });
+
+  it("announces slide changes via aria-live region", () => {
+    render(<PromoCarousel />);
+    const status = screen.getByRole("status");
+    expect(status).toHaveTextContent(/slide 1 of 3/i);
+
+    fireEvent.click(screen.getByRole("button", { name: /next slide/i }));
+    expect(status).toHaveTextContent(/slide 2 of 3/i);
+  });
+
+  it("allows keyboard arrow navigation regardless of focus", () => {
+    render(<PromoCarousel />);
+    fireEvent.keyDown(window, { key: "ArrowRight" });
+    expect(screen.getByRole("heading", { name: /free pickup & delivery/i })).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: "ArrowLeft" });
+    expect(screen.getByRole("heading", { name: /50% off first order/i })).toBeInTheDocument();
+  });
 });

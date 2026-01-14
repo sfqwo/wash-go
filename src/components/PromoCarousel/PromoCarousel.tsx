@@ -3,7 +3,12 @@
 import clsx from "clsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import { Section } from "../Section";
 
@@ -42,17 +47,17 @@ const slides = [
 export function PromoCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
+  }, []);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  }, []);
 
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
-  };
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -60,6 +65,29 @@ export function PromoCarousel() {
     }, 4000);
 
     return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        nextSlide();
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        prevSlide();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [nextSlide, prevSlide]);
+
+  const slideAnnouncement = useMemo(() => {
+    const slide = slides[currentSlide];
+    return `Slide ${currentSlide + 1} of ${slides.length}: ${slide.title}. ${slide.subtitle}`;
   }, [currentSlide]);
 
   const clsxNavButtonPrev = clsx(styles.navButton, styles.prev);
@@ -67,6 +95,10 @@ export function PromoCarousel() {
 
   return (
     <Section className={styles.root}>
+      <p className={styles.visuallyHidden} aria-live="polite" aria-atomic="true" role="status">
+        {slideAnnouncement}
+      </p>
+
       {slides.map((slide, index) => {
         const clsxSlide = clsx(styles.slide, { [styles.slideActive]: index === currentSlide });
         const clsxOverlay = clsx(styles.slideOverlay, styles[slide.colorClass]);
