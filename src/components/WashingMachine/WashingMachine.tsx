@@ -1,6 +1,14 @@
 "use client";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+  useId,
+} from "react";
 
 import styles from "./WashingMachine.module.scss";
 
@@ -10,8 +18,8 @@ type CycleStep = {
   durationMs: number;
 };
 
-const CLOTH_KEYS = ["cloth1", "cloth2", "cloth3", "cloth4"] as const;
-const BUBBLE_KEYS = ["bubble1", "bubble2", "bubble3", "bubble4", "bubble5"] as const;
+const CLOTH_COUNT = 5;
+const BUBBLE_COUNT = 5;
 const CYCLE_STEPS: CycleStep[] = [
   { label: "Fill", icon: "💧", durationMs: 2500 },
   { label: "Wash", icon: "🌀", durationMs: 6000 },
@@ -37,22 +45,34 @@ const formatTimeLeft = (ms: number) => {
 export function WashingMachine() {
   const [isRunning, setIsRunning] = useState(false);
   const [cycleIndex, setCycleIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [stepTimeLeft, setStepTimeLeft] = useState(CYCLE_STEPS[0].durationMs);
-  const [hasCompleted, setHasCompleted] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const frameRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
+  const statusId = useId();
+
+  const cleanupAnimation = useCallback(() => {
+    if (frameRef.current) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => cleanupAnimation, [cleanupAnimation]);
 
   useEffect(() => {
     if (!isRunning) {
-      return;
+      cleanupAnimation();
+      startTimeRef.current = null;
+      return undefined;
     }
-    setHasCompleted(false);
-    const startTimestamp = performance.now();
-    let frameId: number;
-
-    const tick = (now: number) => {
-      const elapsed = now - startTimestamp;
+    startTimeRef.current = performance.now();
+    const animate = (timestamp: number) => {
+      if (!startTimeRef.current) {
+        startTimeRef.current = timestamp;
+      }
+      const elapsed = timestamp - startTimeRef.current;
       const normalized = Math.min(elapsed / TOTAL_CYCLE_DURATION, 1);
-      setProgress(normalized * 100);
 
       const foundIndex = STEP_END_TIMES.findIndex((endTime) => elapsed < endTime);
       const currentIndex = foundIndex === -1 ? CYCLE_STEPS.length - 1 : foundIndex;
@@ -62,63 +82,74 @@ export function WashingMachine() {
       setStepTimeLeft(Math.max(0, currentStep.durationMs - (elapsed - previousEndTime)));
 
       if (normalized >= 1) {
-        setHasCompleted(true);
-        setCycleIndex(CYCLE_STEPS.length - 1);
-        setStepTimeLeft(0);
-        setProgress(100);
-        setIsRunning(false);
+        startTransition(() => {
+          setCycleIndex(CYCLE_STEPS.length - 1);
+          setStepTimeLeft(0);
+          setIsRunning(false);
+        });
         return;
       }
 
-      frameId = requestAnimationFrame(tick);
+      frameRef.current = requestAnimationFrame(animate);
     };
 
-    frameId = requestAnimationFrame(tick);
+    frameRef.current = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(frameId);
+      cleanupAnimation();
     };
-  }, [isRunning]);
+  }, [cleanupAnimation, isRunning, startTransition]);
 
-  const resetCycleState = () => {
+  const resetCycleState = useCallback(() => {
     setCycleIndex(0);
     setStepTimeLeft(CYCLE_STEPS[0].durationMs);
-    setProgress(0);
-  };
+  }, []);
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     if (isRunning) {
       return;
     }
-    resetCycleState();
-    setHasCompleted(false);
-    setIsRunning(true);
-  };
+    startTransition(() => {
+      resetCycleState();
+      startTimeRef.current = null;
+      setIsRunning(true);
+    });
+  }, [isRunning, resetCycleState, startTransition]);
 
-  const handleStop = () => {
+  const handleStop = useCallback(() => {
     if (!isRunning) {
       return;
     }
-    setIsRunning(false);
-    resetCycleState();
-    setHasCompleted(false);
-  };
+    startTransition(() => {
+      setIsRunning(false);
+      resetCycleState();
+    });
+  }, [isRunning, resetCycleState, startTransition]);
 
   const currentStep = CYCLE_STEPS[cycleIndex] ?? CYCLE_STEPS[0];
-  const statusLabel = isRunning ? `${currentStep.icon} ${currentStep.label}` : hasCompleted ? "Door unlocked!" : "";
-  const statusTime = isRunning ? `${formatTimeLeft(stepTimeLeft)}` : hasCompleted ? "" : "Press start to begin";
-  const showWater = isRunning;
-  const showBubbles = isRunning;
-  const startDisabled = isRunning;
-  const stopDisabled = !isRunning;
-  const progressWidth = `${Math.min(100, progress)}%`;
+  const statusText = useMemo(
+    () => (isRunning ? `${currentStep.icon} ${currentStep.label}` : "Press start to begin"),
+    [currentStep.icon, currentStep.label, isRunning],
+  );
+  const statusMeta = useMemo(
+    () => (isRunning ? `${formatTimeLeft(stepTimeLeft)}` : ""),
+    [isRunning, stepTimeLeft],
+  );
   const clsxDrum = clsx(styles.drum, { [styles.drumRunning]: isRunning });
+  const disableStart = isRunning || isPending;
+  const disableStop = !isRunning && !isPending;
 
   return (
     <div className={styles.container}>
       <div className={styles.machine}>
         <div className={styles.control}>
-          <div className={styles.display}>{statusLabel} {statusTime}</div>
+          <div className={styles.displayCluster}>
+            <div id={statusId} className={styles.display} aria-live="polite">
+              {statusText}
+              &nbsp;
+              {statusMeta}
+            </div>
+          </div>
           <div className={styles.buttons}>
             <button
               type="button"
@@ -126,7 +157,7 @@ export function WashingMachine() {
               onClick={handleStop}
               title="Stop machine"
               aria-label="Stop washing cycle"
-              disabled={stopDisabled}
+              disabled={disableStop}
             />
             <button
               type="button"
@@ -134,7 +165,7 @@ export function WashingMachine() {
               onClick={handleStart}
               title="Start machine"
               aria-label="Start washing cycle"
-              disabled={startDisabled}
+              disabled={disableStart}
             />
           </div>
         </div>
@@ -142,27 +173,31 @@ export function WashingMachine() {
         <div className={styles.window}>
           <div className={clsxDrum}>
             <div className={styles.clothes}>
-              {CLOTH_KEYS.map((key) => (
+              {Array.from({ length: CLOTH_COUNT }).map((_, index) => {
+                const key = `cloth${index}`;
+                return (
                 <div
                   key={key}
                   className={clsx(styles.cloth, styles[key], { [styles.clothRunning]: isRunning })}
                 />
-              ))}
+              );
+              })}
             </div>
           </div>
 
-          {showWater && (
+          {isRunning ? (
             <>
               <div className={styles.water} />
-              {showBubbles ? (
-                <div className={styles.bubbles}>
-                  {BUBBLE_KEYS.map((key) => (
+              <div className={styles.bubbles}>
+                {Array.from({ length: BUBBLE_COUNT }).map((_, index) => {
+                  const key = `bubble${index}`;
+                  return (
                     <div key={key} className={clsx(styles.bubble, styles[key])} />
-                  ))}
-                </div>
-              ) : null}
+                  );
+                })}
+              </div>
             </>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
