@@ -1,10 +1,10 @@
-import type { PropsWithChildren } from 'react';
-import type { PrimitivePropsWithRef } from '@radix-ui/react-primitive';
+import type { PrimitivePropsWithRef } from "@radix-ui/react-primitive";
+import type { PropsWithChildren } from "react";
 
-import type { TAsProps, TSize, TProps } from '../types';
+import type { TAsProps, TSize, TProps } from "../types";
 
 export type TAsChild = {
-  asChild?: PrimitivePropsWithRef<'button'>['asChild'];
+  asChild?: PrimitivePropsWithRef<"button">["asChild"];
 };
 
 export type TDefaultButtonProps = {
@@ -18,6 +18,6 @@ export type TDefaultButtonProps = {
   hidden?: boolean;
 };
 
-export type TBaseButtonProps<T extends TAsProps = 'button'> = PropsWithChildren<TProps<T>> &
+export type TBaseButtonProps<T extends TAsProps = "button"> = PropsWithChildren<TProps<T>> &
   TDefaultButtonProps &
   TAsChild;

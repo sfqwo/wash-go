@@ -1,7 +1,16 @@
 @use "../_field.scss" as *;
+@use "../_variables.scss" as vars;
 
 .root {
   @extend .field;
+
+  & > textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    field-sizing: content;
+    overflow: hidden;
+  }
 
   &.hidden {
     position: absolute;
@@ -14,5 +23,12 @@
     padding: 0;
     border: 0;
     white-space: nowrap;
+  }
+
+  .counter {
+    margin-top: vars.$spacing-xs;
+    font-size: vars.$font-size-sm;
+    color: vars.$color-text-secondary;
+    align-self: flex-end;
   }
 }

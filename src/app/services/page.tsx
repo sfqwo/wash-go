@@ -1,6 +1,6 @@
 import { Page } from "@/components/Page";
-import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Section } from "@/components/Section";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Services } from "@/components/Services";
 import { WashingMachine } from "@/components/WashingMachine";
 

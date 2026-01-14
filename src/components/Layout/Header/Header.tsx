@@ -1,19 +1,19 @@
 "use client";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { Section } from "@/components/Section";
 import type { TPropsWithClassName } from "@/components/types";
 import { Dropdown, DropdownItem } from "@/components/UI/Dropdown";
 
-import logo from '../../../../public/android-chrome-192x192.png';
+import logo from "../../../../public/android-chrome-192x192.png";
 import { contacts, navigation } from "../constants";
 import type { ILink } from "../types";
 
 import styles from "./Header.module.scss";
-import { Section } from "@/components/Section";
 
 const HeaderNavigationLink = ({ id, title, ...props }: ILink) => {
   const pathname = usePathname();

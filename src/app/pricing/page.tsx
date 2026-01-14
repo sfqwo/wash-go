@@ -1,9 +1,9 @@
 import { Award, Sparkles, TrendingDown } from "lucide-react";
 
 import { Page } from "@/components/Page";
-import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Pricing } from "@/components/Pricing";
 import { Section } from "@/components/Section";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 
 import styles from "./page.module.scss";
 

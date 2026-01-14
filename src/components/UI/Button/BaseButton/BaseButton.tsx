@@ -1,18 +1,19 @@
-import { forwardRef } from 'react';
-import type { ForwardedRef, Ref } from 'react';
-import { Primitive } from '@radix-ui/react-primitive';
-import clsx from 'clsx';
+import { Primitive } from "@radix-ui/react-primitive";
+import clsx from "clsx";
+import { forwardRef } from "react";
+import type { ForwardedRef, Ref } from "react";
 
-import type { TAsProps, TButtonRef } from '../types';
-import { isAnchor, isButton } from './typeGuards';
-import type { TBaseButtonProps } from './types';
-import styles from './BaseButton.module.scss';
+import type { TAsProps, TButtonRef } from "../types";
+
+import styles from "./BaseButton.module.scss";
+import { isAnchor, isButton } from "./typeGuards";
+import type { TBaseButtonProps } from "./types";
 
 const PrimitiveAnchor = Primitive.a;
 const PrimitiveButton = Primitive.button;
 
 const BaseButton = forwardRef(
-  <T extends TAsProps = 'button'>(props: TBaseButtonProps<T>, ref?: Ref<TButtonRef<T>>) => {
+  <T extends TAsProps = "button">(props: TBaseButtonProps<T>, ref?: Ref<TButtonRef<T>>) => {
     const clsxButton = clsx(styles.root, props.className, props.hidden && styles.hidden);
     if (isAnchor(props)) {
       const {
@@ -33,7 +34,7 @@ const BaseButton = forwardRef(
 
     if (isButton(props)) {
       const {
-        type = 'button', disabled, children, size, ...rest
+        type = "button", disabled, children, size, ...rest
       } = props;
       return (
         <PrimitiveButton
@@ -49,16 +50,16 @@ const BaseButton = forwardRef(
       );
     }
 
-    // eslint-disable-next-line no-console
+     
     console.error('BaseButton "as" mismatch');
 
     return null;
   },
 );
 
-BaseButton.displayName = '@UI/BaseButton';
+BaseButton.displayName = "@UI/BaseButton";
 
-export default BaseButton as <T extends TAsProps = 'button'>(
+export default BaseButton as <T extends TAsProps = "button">(
   props: TBaseButtonProps<T> & {
     ref?: ForwardedRef<TButtonRef<T>>;
   },

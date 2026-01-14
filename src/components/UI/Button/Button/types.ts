@@ -1,23 +1,23 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from "react";
 
-import type { TAsProps } from '../types';
-import type { TBaseButtonProps } from '../BaseButton/types';
+import type { TBaseButtonProps } from "../BaseButton/types";
+import type { TAsProps } from "../types";
 
 export const Variants = {
-  Primary: 'primary',
-  Secondary: 'secondary',
+  Primary: "primary",
+  Secondary: "secondary",
 } as const;
 
 export type TVariant = (typeof Variants)[keyof typeof Variants];
 
-export type TButtonPrimary<T extends TAsProps = 'button'> = {
+export type TButtonPrimary<T extends TAsProps = "button"> = {
   variant: typeof Variants.Primary;
-  gradient?: 'blueRadial' | 'pinkRadial' | 'greenRadial';
+  gradient?: "blueRadial" | "pinkRadial" | "greenRadial";
 } & TBaseButtonProps<T>;
 
-export type TButtonSecondary<T extends TAsProps = 'button'> = {
+export type TButtonSecondary<T extends TAsProps = "button"> = {
   variant: typeof Variants.Secondary;
-  appearance?: 'simple' | 'outlined' | 'text';
+  appearance?: "simple" | "outlined" | "text";
 } & TBaseButtonProps<T>;
 
 export type TButtonVariants<T extends TAsProps> =
@@ -31,13 +31,13 @@ export type TButtonCommonProps = {
   disabled?: boolean;
 };
 
-export type TButtonProps<T extends TAsProps = 'button'> = TButtonVariants<T> & TButtonCommonProps;
+export type TButtonProps<T extends TAsProps = "button"> = TButtonVariants<T> & TButtonCommonProps;
 
 export type TButtonChildrenProps = PropsWithChildren<{
-  asChild?: TButtonProps['asChild'];
+  asChild?: TButtonProps["asChild"];
 }>;
 
 export type TOmitButtonCommonProps = Omit<
-  TButtonProps<'a' | 'button'>,
-  keyof Omit<TButtonVariants<'a' | 'button'>, 'as'>
+  TButtonProps<"a" | "button">,
+  keyof Omit<TButtonVariants<"a" | "button">, "as">
 >;

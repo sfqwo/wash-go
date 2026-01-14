@@ -4,8 +4,8 @@ import { Clock, Shield, Sparkles, Truck } from "lucide-react";
 
 import { OrderForm } from "@/components/OrderForm";
 import { Page } from "@/components/Page";
-import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Section } from "@/components/Section";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 
 import styles from "./page.module.scss";
 
