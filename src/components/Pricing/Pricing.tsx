@@ -1,6 +1,7 @@
 "use client";
 import clsx from "clsx";
 import { Check } from "lucide-react";
+import type { FormEvent } from "react";
 import { useForm } from "react-hook-form";
 
 import { Section } from "../Section";
@@ -78,19 +79,26 @@ const PricingItemModalContent = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
-  } = useForm<TPricingFormData>();
+  } = useForm<TPricingFormData>({
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      plan: "default",
+    },
+  });
 
   const onSubmit = () => {
     reset();
   };
-  const submitHandler = () => {
-    handleSubmit(onSubmit);
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    void handleSubmit(onSubmit)(event);
   };
 
   return (
-    <form onSubmit={submitHandler} className={styles.form}>
+    <form onSubmit={handleFormSubmit} className={styles.form}>
       <Field
         id="name"
         label={{
@@ -104,7 +112,6 @@ const PricingItemModalContent = () => {
 
       <Field
         id="email"
-        type="email"
         label={{
           text: "E-mail",
           isError: !!errors?.email?.message,
@@ -123,10 +130,13 @@ const PricingItemModalContent = () => {
         id="Plan"
         label="Selected plan"
         options={plansOptions}
-        {...register("plan", { required: "Plan is required" })}
+        {...register("plan", {
+          required: "Plan is required",
+          validate: (value) => value !== "default" || "Plan is required",
+        })}
       />
 
-      <Button variant="primary" type="submit">Send</Button>
+      <Button variant="primary" type="submit" disabled={!isValid}>Send</Button>
     </form>
   );
 };

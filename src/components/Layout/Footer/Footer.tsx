@@ -114,6 +114,7 @@ export function Footer() {
               placeholder="you@example.com"
               className={styles.formField}
               {...register("email", {
+                required: "Email is required",
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   message: "Enter a valid email address",
@@ -123,7 +124,7 @@ export function Footer() {
             <Button
               type="submit"
               variant="primary"
-              disabled={isValid}
+              disabled={!isValid}
               className={styles.subscribeButton}
             >
               {isSubmitting ? "Subscribing..." : "Subscribe"}
