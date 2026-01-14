@@ -1,5 +1,5 @@
 import { Page } from "@/components/Page";
-import { PageTitle } from "@/components/PageTitle/PageTitle";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Section } from "@/components/Section";
 import { Services } from "@/components/Services";
 import { WashingMachine } from "@/components/WashingMachine";
@@ -13,7 +13,7 @@ export default function ServicesPage() {
   return (
     <Page>
       <Section className={styles.root}>
-        <PageTitle title={TITLE} subtitle={SUBTITLE} />
+        <SectionTitle title={TITLE} subtitle={SUBTITLE} />
         <WashingMachine />
       </Section>
       <Services />

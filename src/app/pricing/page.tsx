@@ -1,7 +1,7 @@
 import { Award, Sparkles, TrendingDown } from "lucide-react";
 
 import { Page } from "@/components/Page";
-import { PageTitle } from "@/components/PageTitle/PageTitle";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Pricing } from "@/components/Pricing";
 import { Section } from "@/components/Section";
 
@@ -32,7 +32,7 @@ export default function PricingPage() {
   return (
     <Page>
       <Section className={styles.root} bg="yellow">
-        <PageTitle title={TITLE} subtitle={SUBTITLE} />
+        <SectionTitle title={TITLE} subtitle={SUBTITLE} />
 
         <div className={styles.features}>
           {features.map(({ title, description, icon: Icon }) => (

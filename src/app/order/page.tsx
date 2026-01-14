@@ -4,7 +4,7 @@ import { Clock, Shield, Sparkles, Truck } from "lucide-react";
 
 import { OrderForm } from "@/components/OrderForm";
 import { Page } from "@/components/Page";
-import { PageTitle } from "@/components/PageTitle/PageTitle";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { Section } from "@/components/Section";
 
 import styles from "./page.module.scss";
@@ -40,7 +40,7 @@ export default function OrderPage() {
   return (
     <Page>
       <Section className={styles.root} bg="green">
-        <PageTitle title={TITLE} subtitle={SUBTITLE} />
+        <SectionTitle title={TITLE} subtitle={SUBTITLE} />
         
         <div className={styles.benefits}>
           {benefits.map(({ title, description, icon: Icon }) => (

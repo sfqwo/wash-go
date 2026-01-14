@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 .root {
   padding: 0;
 
@@ -195,7 +197,7 @@
   animation: dotPulse 1s ease-in-out infinite;
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
   .subtitle {
     font-size: var(--font-size-lg);
   }

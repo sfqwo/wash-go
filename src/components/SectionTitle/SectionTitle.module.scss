@@ -1,7 +1,9 @@
+@use '../../styles/breakpoints' as *;
+
 
 .root {
   max-width: 1200px;
-  margin: 0 auto var(--spacing-xl);
+  margin: 0 auto var(--spacing-lg);
   animation: none;
 }
 
@@ -9,12 +11,13 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   user-select: none;
   text-align: center;
 }
 
 .subtitle {
+  margin: 0;
   font-size: var(--font-size-md);
   color: var(--color-text-primary);
   line-height: 1.6;
@@ -22,24 +25,30 @@
   user-select: none;
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
+  .root {
+    margin: 0 auto var(--spacing-xl);
+  }
+
   .title {
     font-size: var(--font-size-xl);
   }
+
+  .subtitle {
+    font-size: var(--font-size-md);
+  }
 }
 
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
+@keyframes titleShine {
+  0%, 100% {
+    background-position: 0% 50%;
   }
 
-  to {
-    opacity: 1;
-    transform: scale(1);
+  50% {
+    background-position: 100% 50%;
   }
 }
 
 :global([data-section-visible="true"]) .root {
-  animation: fadeInScale 0.8s ease-out;
+  animation: titleShine 0.8s ease-out;
 }

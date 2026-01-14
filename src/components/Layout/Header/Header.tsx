@@ -2,15 +2,18 @@
 import clsx from "clsx";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import type { TPropsWithClassName } from "@/components/types";
 import { Dropdown, DropdownItem } from "@/components/UI/Dropdown";
 
+import logo from '../../../../public/android-chrome-192x192.png';
 import { contacts, navigation } from "../constants";
 import type { ILink } from "../types";
 
 import styles from "./Header.module.scss";
+import { Section } from "@/components/Section";
 
 const HeaderNavigationLink = ({ id, title, ...props }: ILink) => {
   const pathname = usePathname();
@@ -45,7 +48,7 @@ const HeaderMenu = ({ className }: TPropsWithClassName) => {
               {label}
             </Link>
           ))}
-          <DropdownItem><HeaderNavigationButton /></DropdownItem>
+          <DropdownItem asChild><HeaderNavigationButton /></DropdownItem>
         </div>
       </nav>
     )}>
@@ -78,19 +81,18 @@ const HeaderNavigation = ({ className }: TPropsWithClassName) => {
 
 export function Header() {
   return (
-    <header className={styles.root}>
+    <Section as="header" className={styles.root}>
       <div className={styles.headerContent}>
         <Link href="/" className={styles.logo}>
           <div className={styles.logoIcon}>
-            <span>🧺</span>
+            <Image src={logo.src} alt="" width={40} height={40} />
           </div>
           <span className={styles.logoText}>WASH&GO Loundry</span>
         </Link>
 
         <HeaderNavigation className={styles.nav_desktop} />
+        <HeaderMenu className={styles.nav_mobile} />
       </div>
-
-      <HeaderMenu className={styles.nav_mobile} />
-    </header>
+    </Section>
   );
 }

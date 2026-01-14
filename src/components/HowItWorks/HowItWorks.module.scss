@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 :global([data-section-visible="true"]) .step {
   animation: popIn 0.6s ease-out both;
 }
@@ -116,13 +118,13 @@
   }
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1024px) {
+@include respond(lg) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
   }

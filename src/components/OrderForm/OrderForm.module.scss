@@ -1,14 +1,14 @@
+@use '../../styles/breakpoints' as *;
+
 .root {
   background: var(--color-background);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
   box-shadow: 0 10px 40px var(--color-shadow-light);
   animation: none;
+  padding: var(--spacing-md) var(--spacing-lg);
 }
 
 .service {
-  padding: var(--spacing-md) var(--spacing-md) 0 var(--spacing-md);
-
   &Grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -68,25 +68,29 @@
   }
 
   &Icon {
-    width: 3rem;
-    height: 3rem;
-    margin: 0 auto 0.75rem;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto var(--spacing-sm);
     color: var(--color-primary-light);
     transition: transform 0.3s ease;
   }
 
   &Title {
     font-weight: var(--font-weight-bold);
-    color: #111827;
-    margin-bottom: 0.25rem;
+    margin: var(--spacing-sm) 0;
     font-size: var(--font-size-md);
   }
 
   &Description {
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
+    margin: var(--spacing-xs) 0;
     line-height: 1.4;
   }
+}
+
+.label {
+  margin: var(--spacing-lg) 0;
 }
 
 .row {
@@ -100,7 +104,7 @@
   animation: slideUp 0.6s ease-out;
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
   .root {
     padding: var(--spacing-xl);
   }
@@ -109,12 +113,30 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
-  .serviceGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .service {
+    &Grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &Card {
+      &Title {
+        font-size: var(--font-size-lg);
+      }
+
+      &Description {
+        font-size: var(--font-size-md);
+        margin: var(--spacing-sm) 0;
+      }
+    }
+
+    &Icon {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 }
 
-@media (min-width: 1024px) {
+@include respond(lg) {
   .serviceGrid {
     grid-template-columns: repeat(4, 1fr);
   }

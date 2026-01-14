@@ -1,4 +1,7 @@
+@use '../../styles/breakpoints' as *;
+
 .root {
+  min-height: 40vh;
   &::before {
     content: '🚚';
     position: absolute;
@@ -31,13 +34,12 @@
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 16px (--color-shadow-dark);
+    box-shadow: 0 8px 16px var(--color-shadow-dark);
   }
 
   &Icon {
-    width: 4rem;
-    height: 4rem;
-    min-width: 4rem;
+    width: 3rem;
+    height: 3rem;
     background: linear-gradient(135deg, #10b981, #059669);
     border-radius: var(--radius-md);
     display: flex;
@@ -68,7 +70,7 @@
   }
 }
 
-:global([data-section-visible="true"]) .root::before {
+:global([data-section-visible="true"]).root::before {
   animation: truckDrive 4s ease-in-out infinite;
 }
 
@@ -82,7 +84,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
   .benefits {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
@@ -98,10 +100,15 @@
     &Text {
       font-size: var(--font-size-sm);
     }
+
+    &Icon {
+    width: 4rem;
+    height: 4rem;
+  }
   }
 }
 
-@media (min-width: 1024px) {
+@include respond(lg) {
   .benefits {
     grid-template-columns: repeat(4, 1fr);
   }

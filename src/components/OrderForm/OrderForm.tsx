@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { Section } from "../Section";
 import { SectionTitle } from "../SectionTitle";
-import Button from "../UI/Button";
+import Button from "../UI/Button/Button/Button";
 import { Field, Select } from "../UI/Form";
 
 import styles from "./OrderForm.module.scss";
@@ -75,7 +75,7 @@ export const OrderForm = () => {
 
       <form onSubmit={submitHandler} className={styles.root}>
         <div className={styles.service}>
-          <h3 className={styles.sectionLabel}>Select Your Service</h3>
+          <h3 className={styles.label}>Select Your Service</h3>
           <div className={styles.serviceGrid}>
             {services.map(({ id, title, description, icon: Icon }) => {
               const clsxService = clsx(styles.serviceCard, { [styles.selected]: selectedService === id });
@@ -96,7 +96,7 @@ export const OrderForm = () => {
           </div>
         </div>
 
-        <h3 className={styles.sectionLabel}>Your Information</h3>
+        <h3 className={styles.label}>Your Information</h3>
 
         <div className={styles.row}>
           <Field
@@ -158,7 +158,7 @@ export const OrderForm = () => {
           />
         </div>
 
-        <h3 className={styles.sectionLabel}>Pickup Schedule</h3>
+        <h3 className={styles.label}>Pickup Schedule</h3>
 
         <div className={styles.row}>
           <Field
@@ -190,7 +190,7 @@ export const OrderForm = () => {
           />
         </div>
 
-        <Button type="submit" disabled={!selectedService}>
+        <Button variant="primary" type="submit" disabled={!selectedService}>
           {buttonText}
         </Button>
       </form>

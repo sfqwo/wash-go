@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { Section } from "../Section";
 import { SectionTitle } from "../SectionTitle";
-import Button from "../UI/Button";
+import Button from "../UI/Button/Button/Button";
 import { Dialog } from "../UI/Dialog";
 import { Field, Select } from "../UI/Form";
 
@@ -126,7 +126,7 @@ const PricingItemModalContent = () => {
         {...register("plan", { required: "Plan is required" })}
       />
 
-      <Button type="submit">Send</Button>
+      <Button variant="primary" type="submit">Send</Button>
     </form>
   );
 };
@@ -139,7 +139,7 @@ const PricingItemModal = ({ popular }: Pick<typeof plans[0], "popular">) => {
       description="Enter your name and email, and we’ll help you choose the best option."
       content={<PricingItemModalContent />}
     >
-      <Button variant={variant}>Get Started</Button>
+      <Button size="S" variant={variant}>Get Started</Button>
     </Dialog>
   );
 };

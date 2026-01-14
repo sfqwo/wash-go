@@ -1,72 +1,71 @@
+@use '../../../styles/breakpoints' as *;
+
 .root {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  padding: var(--spacing-md);
-  background: var(--color-background);
-  box-shadow: 0 2px 8px var(--color-shadow);
+  box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
+  background: var(--color-background);
+  box-shadow: 0 2px 12px rgba(16, 50, 104, 0.1);
+  padding: var(--spacing-md);
 }
 
 .headerContent {
-  max-width: 1200px;
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: 0;
 }
 
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
   text-decoration: none;
-  animation: bounce 1s ease-in-out;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
 
   &Icon {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: rotate(360deg) scale(1.1);
-    }
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
   }
 
   &Text {
     color: var(--color-primary-dark);
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-md);
+    text-align: left;
   }
-
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  align-items: center;
-  padding: var(--spacing-md);
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  width: 100%;
+  font-size: var(--font-size-md);
 
   &Link {
-    width: 100%;
     color: var(--color-primary-dark);
     text-decoration: none;
     position: relative;
     transition: color 0.3s ease;
+    padding: var(--spacing-xs) 0;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
-      bottom: -4px;
+      bottom: -2px;
       left: 0;
       width: 0;
       height: 2px;
@@ -87,82 +86,81 @@
   &_desktop {
     display: none;
   }
+
+  &_mobile {
+    width: 100%;
+  }
 }
 
 .actions {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .bookButton {
-  box-sizing: border-box;
   background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
   color: var(--color-background);
   border: none;
-  width: 100%;
-  padding: var(--spacing-sm);
-  border-radius: 0.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  width: 100%;
-  transition: all 0.3s ease;
-  text-decoration: none;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: var(--font-weight-bold);
   text-align: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+  }
 }
 
 .phone {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  min-width: 110px;
+  gap: var(--spacing-sm);
   color: var(--color-primary-dark);
   text-decoration: none;
   transition: color 0.3s ease;
-  gap: var(--spacing-sm);
 
   &:hover {
     color: var(--color-primary);
   }
 
   &>svg {
+    width: 32px;
+    height: 32px;
     animation: ring 2s ease-in-out infinite;
   }
 }
 
 .menuButton {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
-  border: none;
-  gap: var(--spacing-sm);
-  cursor: pointer;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 44px;
+  height: 44px;
   color: var(--color-primary-dark);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: var(--color-primary-light);
+    color: var(--color-background);
+  }
 }
 
-@media (min-width: 768px) {
-  .bookButton {
-    width: auto;
-    padding: var(--spacing-sm);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 4px 6px var(--color-shadow);
-    min-width: 125px;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px var(--color-shadow-hover);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
-
+@include respond(md) {
   .nav {
-    align-items: center;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-xl);
 
     &_desktop {
       display: flex;
@@ -179,22 +177,45 @@
 
   .actions {
     flex-direction: row;
-    flex: 2;
+    justify-content: flex-end;
     align-items: center;
-  }
-
-  .headerContent {
-    margin: 0 auto;
-    width: 100%;
-    justify-content: space-between;
   }
 
   .menuButton {
     display: none;
   }
 
-  .phone>svg {
-    display: none;
+  .phone {
+    font-size: 0;
+
+    &>svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+@include respond(lg) {
+  .logoText {
+    text-transform: uppercase;
+  }
+
+  .headerContent {
+    gap: var(--spacing-lg);
+  }
+
+  .nav {
+    gap: var(--spacing-xxl);
+  }
+
+  .phone {
+    font-size: var(--font-size-md);
+    max-width: none;
+    gap: var(--spacing-xs);
+
+    &>svg {
+      display: none;
+    }
   }
 }
 

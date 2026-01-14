@@ -1,3 +1,5 @@
+@use '../../../styles/breakpoints' as *;
+
 .modal {
   box-sizing: border-box;
   position: fixed;
@@ -57,7 +59,7 @@
   margin-bottom: var(--spacing-xl);
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
   .modal {
     top: 50%;
     transform: translate(-50%, -50%);

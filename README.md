@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+
+### 🧺 WASH&GO
+
+Modern marketing site for an on-demand laundry service. Built with the Next.js App Router, fully responsive layout components, reusable UI primitives, and animated sections powered by CSS + Radix UI.
+
+</div>
+
+---
+
+## Features
+
+- **Landing sections:** Promo carousel, services grid, how-it-works steps, pricing cards, and a multi-step order form.
+- **Reusable UI kit:** Button, dialog, dropdown, and form controls that wrap Radix UI primitives.
+- **Smooth interactions:** Intersection-observer driven reveal animations, sticky header, and smooth scroll between anchors.
+- **Typed codebase:** TypeScript throughout, with strict ESLint + Next.js config.
+- **Testing:** Vitest + React Testing Library unit tests for core UI components.
+
+## Requirements
+
+- Node.js 20+
+- npm 10+ (or any compatible package manager)
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and start the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to browse the site. The App Router automatically reloads when files in `src/` change.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command            | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| `npm run dev`      | Start the Next.js development server with Turbopack.                        |
+| `npm run build`    | Create a production build.                                                  |
+| `npm run start`    | Launch the built app in production mode.                                    |
+| `npm run lint`     | Run ESLint using `eslint.config.mjs`.                                       |
+| `npm run test`     | Execute unit tests with Vitest (jsdom environment, RTL assertions).         |
+| `npm run test:watch` | Run Vitest in watch mode.                                                 |
 
-## Learn More
+## Testing
 
-To learn more about Next.js, take a look at the following resources:
+Vitest is configured via `vitest.config.ts` with:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- jsdom environment
+- React plugin + path alias `@/`
+- Global setup in `vitest.setup.tsx` (IntersectionObserver, ResizeObserver, `next/link` mocks)
+- React Testing Library + `@testing-library/jest-dom`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To run the suite:
 
-## Deploy on Vercel
+```bash
+npm run test
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Tests cover components such as `PromoCarousel`, `Section`, `Button`, `Dropdown`, `Dialog`, `Select`, and form controls.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+src/
+├─ app/                  # Next.js App Router pages (home, pricing, order, etc.)
+├─ components/
+│  ├─ Layout/            # Header, Footer, Page layout pieces
+│  ├─ PromoCarousel/     # Hero carousel
+│  ├─ Services/, Pricing/, HowItWorks/, OrderForm/
+│  └─ UI/                # Reusable UI primitives & form controls
+└─ app/globals.css       # Global styles & CSS variables
+```
+
+## Deployment
+
+1. Generate a production build: `npm run build`
+2. Run locally with `npm run start` or deploy to any platform that supports Next.js (Vercel recommended).
+
+## License
+
+This project is distributed for demonstration purposes. Adapt or extend it for your own laundry/delivery service UI.

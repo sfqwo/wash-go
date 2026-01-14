@@ -1,0 +1,31 @@
+@use './size';
+
+.root {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  padding: 0;
+
+  &[type='button'],
+  &[type='reset'],
+  &[type='submit'] {
+    -webkit-appearance: button;
+  }
+
+  &.hidden {
+    position: absolute;
+    width: 1px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  @include size.data-size;
+}

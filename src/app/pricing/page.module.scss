@@ -1,4 +1,7 @@
+@use '../../styles/breakpoints' as *;
+
 .root {
+
   &::before,
   &::after {
     content: '💰';
@@ -10,6 +13,7 @@
     top: -5rem;
     right: -5rem;
     animation: none;
+    opacity: 0.4;
   }
 
   &::after {
@@ -28,17 +32,17 @@
 
 .feature {
   background: var(--color-background);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-md);
   border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   animation: none;
   cursor: pointer;
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    box-shadow:  0 8px 12px rgba(0, 0, 0, 0.15);
 
     .featureIcon {
       transform: rotate(360deg) scale(1.1);
@@ -46,8 +50,8 @@
   }
 
   &Icon {
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     margin: 0 auto var(--spacing-md);
     background: linear-gradient(135deg, #fbbf24, #f59e0b);
     border-radius: var(--radius-md);
@@ -66,12 +70,13 @@
   &Title {
     font-weight: var(--font-weight-bold);
     color: var(--color-text-primary);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 0;
   }
 
   &Text {
     color: var(--color-text-secondary);
     font-size: var(--font-size-sm);
+    margin-bottom: 0;
   }
 }
 
@@ -93,9 +98,20 @@
   }
 }
 
-@media (min-width: 640px) {
+@include respond(sm) {
   .features {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@include respond(md) {
+  .feature {
+    padding: var(--spacing-xl);
+
+    &Icon {
+      width: 4rem;
+      height: 4rem;
+    }
   }
 }
 

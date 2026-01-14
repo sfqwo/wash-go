@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 .root {
   position: relative;
   overflow: hidden;
@@ -49,7 +51,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
   .root {
     padding: var(--spacing-xxl) var(--spacing-xl);
   }

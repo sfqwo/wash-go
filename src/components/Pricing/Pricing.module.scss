@@ -1,9 +1,9 @@
+@use '../../styles/breakpoints' as *;
+
 .root {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  max-width: 75rem;
-  margin: 0 auto;
+  gap: var(--spacing-lg);
 }
 
 .card {
@@ -11,7 +11,7 @@
   background: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   transition: all 0.4s ease;
   animation: none;
 
@@ -39,15 +39,16 @@
   }
 
   &Name {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-primary);
-    margin: var(--spacing-md);
+    margin: var(--spacing-sm);
   }
 
   &Description {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-sm);
+    margin: var(--spacing-sm);
   }
 }
 
@@ -78,7 +79,7 @@
 }
 
 .price {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
 }
 
@@ -97,9 +98,9 @@
 .feature {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-sm) 0;
-  font-size: var(--font-size-md);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
   animation: none;
 
   &>svg {
@@ -143,9 +144,34 @@
   animation: checkBounce 1s ease-in-out infinite;
 }
 
-@media (min-width: 768px) {
+@include respond(md) {
   .root {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    padding: var(--spacing-xl);
+
+    &Name {
+      font-size: var(--font-size-lg);
+      margin: var(--spacing-md);
+    }
+
+    &Description {
+      font-size: var(--font-size-md);
+      margin: var(--spacing-md);
+    }
+  }
+
+  .price {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .feature {
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    font-size: var(--font-size-md);
   }
 }
 

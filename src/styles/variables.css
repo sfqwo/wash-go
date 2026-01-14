@@ -1,0 +1,45 @@
+:root {
+  /* Colors */
+  --color-primary: #2563eb;
+  --color-primary-light: #3b82f6;
+  --color-primary-dark: #103268;
+  --color-text-primary: #333333;
+  --color-text-secondary: #6b7280;
+  --color-text-secondary-light: #9ca3af;
+  --color-border: #e5e7eb;
+  --color-background: #ffffff;
+  --color-shadow-light: rgba(59, 130, 246, 0.1);
+  --color-shadow: rgba(59, 130, 246, 0.3);
+  --color-shadow-dark: rgba(59, 130, 246, 0.45);
+  --color-shadow-hover: rgba(59, 130, 246, 0.4);
+
+  /* Gradients */
+  --gray-gradient: linear-gradient(#f9fafb 0%, #f3f4f6 100%);
+  --blue-gradient: linear-gradient(#eff6ff 0%, #dbeafe 100%);
+  --yellow-gradient: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+  --green-gradient: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
+  --black-gradient: linear-gradient(180deg, #111827 0%, #0f172a 100%);
+
+  /* Typography */
+  --font-primary: 'Inter', sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-md: 18px;
+  --font-size-lg: 24px;
+  --font-size-xl: 36px;
+  --font-size-xxl: 56px;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 40px;
+
+  /* Radius */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
