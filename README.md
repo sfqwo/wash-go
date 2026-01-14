@@ -70,7 +70,7 @@ src/
 │  ├─ PromoCarousel/     # Hero carousel
 │  ├─ Services/, Pricing/, HowItWorks/, OrderForm/
 │  └─ UI/                # Reusable UI primitives & form controls
-└─ app/globals.css       # Global styles & CSS variables
+└─ app/styles            # Global styles & CSS variables
 ```
 
 ## Deployment
