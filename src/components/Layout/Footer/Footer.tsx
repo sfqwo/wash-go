@@ -1,12 +1,51 @@
+"use client";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 import { Section } from "@/components/Section";
+import { Button } from "@/components/UI/Button";
+import { Field } from "@/components/UI/Form";
 
 import { navigation, socialMedia, contacts } from "../constants";
 
 import styles from "./Footer.module.scss";
 
+type NewsletterFormValues = {
+  email: string;
+};
+
+const subscribeToNewsletter = async ({ email }: NewsletterFormValues) => {
+  await new Promise<void>((resolve) => {
+    setTimeout(resolve, 600);
+  });
+
+  return email;
+};
+
 export function Footer() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
+  } = useForm<NewsletterFormValues>({
+    defaultValues: { email: "" },
+  });
+
+  const handleNewsletterSubmit = async (values: NewsletterFormValues) => {
+    await subscribeToNewsletter(values);
+    reset({ email: "" }, { keepIsSubmitted: true });
+    // Connect the actual API call here.
+  };
+
+  const emailLabel = errors.email
+    ? {
+        text: "Email",
+        isError: true,
+        error: errors.email.message,
+      }
+    : "Email";
+
   return (
     <Section as="footer" id="contact" bg="black">
       <div className={styles.root}>
@@ -61,16 +100,40 @@ export function Footer() {
           <p className={styles.columnDescription}>
             Subscribe for exclusive offers and updates
           </p>
-          <form className={styles.columnForm}>
-            <input
+          <form
+            className={styles.columnForm}
+            noValidate
+            onSubmit={(event) => {
+              void handleSubmit(handleNewsletterSubmit)(event);
+            }}
+          >
+            <Field
+              id="newsletter-email"
               type="email"
-              placeholder="Your email"
-              className={styles.input}
+              label={emailLabel}
+              placeholder="you@example.com"
+              className={styles.formField}
+              {...register("email", {
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Enter a valid email address",
+                },
+              })}
             />
-            <button type="submit" className={styles.subscribeButton}>
-              Subscribe
-            </button>
+            <Button
+              type="submit"
+              variant="primary"
+              disabled={isValid}
+              className={styles.subscribeButton}
+            >
+              {isSubmitting ? "Subscribing..." : "Subscribe"}
+            </Button>
           </form>
+          {isSubmitSuccessful && (
+            <p className={styles.successMessage} role="status">
+              Thanks for subscribing! Check your inbox soon.
+            </p>
+          )}
         </div>
       </div>
 

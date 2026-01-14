@@ -65,7 +65,12 @@ export const Label = ({
 };
 
 export const Field = forwardRef(<T extends TFieldTag = "input">({
-  label, tag = "input", className, required, onChange, ...props
+  label,
+  tag = "input",
+  className,
+  required,
+  onChange,
+  ...props
 }: TFieldProps<T>, ref?: ForwardedRef<TFieldRef<T>>) => {
   const clsxRoot = clsx(styles.input, className);
 
@@ -84,7 +89,12 @@ export const Field = forwardRef(<T extends TFieldTag = "input">({
       onChange={handleChange}
       {...props}
     >
-      <Label htmlFor={props.id} required={required} value={label} className={styles.label} />
+      <Label
+        htmlFor={props.id}
+        required={required}
+        value={label}
+        className={styles.label}
+      />
     </BaseInput>
   );
 });

@@ -17,12 +17,15 @@
   font-size: $font-size-md;
   pointer-events: none;
   transition: 0.2s ease all;
-  background-color: $color-background;
   padding: 0 $spacing-xs;
 
   &_required {
     color: $color-error;
     margin-left: 0.25rem;
+  }
+
+  &[data-error="true"] {
+    color: $color-error !important;
   }
 }
 
@@ -33,7 +36,7 @@
   border: 1px solid $color-border;
   border-radius: $radius-md;
   outline: none;
-  background-color: $color-background;
+  background-color: transparent;
   color: $color-text-secondary;
   width: 100%;
   transition: border-color 0.3s, box-shadow 0.3s;

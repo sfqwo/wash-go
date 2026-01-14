@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import { forwardRef, useState } from "react";
 import type { Ref, ForwardedRef, ChangeEventHandler } from "react";

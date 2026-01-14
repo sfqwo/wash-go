@@ -97,30 +97,36 @@
   display: flex;
   gap: var(--spacing-md);
   flex-direction: column;
+  margin-top: 20px;
 }
 
-
-.input {
+.formField {
   flex: 1;
-  padding: var(--spacing-sm);
-  background: transparent;
-  border: 1px solid var(--color-text-primary);
-  border-radius: var(--radius-md);
-  color: var(--color-background);
-  transition: all 0.3s ease;
+  min-width: 200px;
 
-  &:focus {
-    outline: none;
-    border-color: var(--color-primary-light);
-    box-shadow: 0 0 0 3px var(--color-shadow);
+  input {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--color-background);
+
+    &::placeholder {
+      color: var(--color-text-secondary-light);
+    }
+
+    &:focus {
+      border-color: var(--color-primary-light);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.35);
+    }
   }
 
-  &::placeholder {
-    color: var(--color-text-secondary);
+  label {
+    color: var(--color-text-secondary-light);
+    background: transparent;
   }
 }
 
 .subscribeButton {
+  min-width: 135px;
   padding: var(--spacing-sm);
   background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
   color: var(--color-background);
@@ -135,6 +141,12 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 12px var(--color-shadow-hover);
   }
+}
+
+.successMessage {
+  margin-top: var(--spacing-sm);
+  color: var(--color-primary-light);
+  font-size: var(--font-size-sm);
 }
 
 .copyright {
