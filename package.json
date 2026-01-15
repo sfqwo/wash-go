@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -26,7 +28,12 @@
     "typescript-eslint": "^8.47.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.0",
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-a11y": "^10.1.11",
+    "@storybook/addon-docs": "^10.1.11",
+    "@storybook/addon-vitest": "^10.1.11",
+    "@storybook/nextjs-vite": "^10.1.11",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -35,10 +42,16 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.7.0",
+    "@vitest/browser-playwright": "^4.0.12",
+    "@vitest/coverage-v8": "^4.0.12",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "eslint-plugin-storybook": "^10.1.11",
     "jsdom": "^25.0.1",
+    "playwright": "^1.57.0",
+    "storybook": "^10.1.11",
     "typescript": "^5",
+    "vite": "^7.3.1",
     "vitest": "^4.0.12"
   }
 }

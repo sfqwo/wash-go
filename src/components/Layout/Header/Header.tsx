@@ -16,7 +16,7 @@ import type { ILink } from "../types";
 import styles from "./Header.module.scss";
 
 const HeaderNavigationLink = ({ id, title, ...props }: ILink) => {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const isSelected = pathname.includes(id);
   const clsxRoot = clsx(styles.navLink, { [styles.navLink_selected]: isSelected });
   return (

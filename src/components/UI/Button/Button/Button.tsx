@@ -88,7 +88,7 @@ const Button = forwardRef(
     );
 
     if (isButtonPrimary(props)) {
-      const { variant, gradient = "greenRadial", ...rest } = props;
+      const { variant, gradient = "blueRadial", size = "M", ...rest } = props;
 
       return (
         <ButtonWithoutCommonProps
@@ -96,13 +96,14 @@ const Button = forwardRef(
           className={clsxButton}
           data-gradient={gradient}
           data-variant={variant}
+          size={size}
           ref={ref}
         />
       );
     }
 
     if (isButtonSecondary(props)) {
-      const { variant, appearance = "simple", ...rest } = props;
+      const { variant, appearance = "outlined", size = "M", ...rest } = props;
 
       return (
         <ButtonWithoutCommonProps
@@ -110,6 +111,7 @@ const Button = forwardRef(
           className={clsxButton}
           data-variant={variant}
           data-appearance={appearance}
+          size={size}
           ref={ref}
         />
       );

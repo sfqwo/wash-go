@@ -6,6 +6,8 @@
   --color-text-primary: #333333;
   --color-text-secondary: #6b7280;
   --color-text-secondary-light: #9ca3af;
+  --color-wrong: #f10404;
+  --color-wrong-dark: #790202;
   --color-border: #e5e7eb;
   --color-background: #ffffff;
   --color-shadow-light: rgba(59, 130, 246, 0.1);

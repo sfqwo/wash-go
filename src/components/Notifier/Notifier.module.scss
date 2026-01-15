@@ -55,7 +55,7 @@
 
 .ToastRootVariants_ {
   &error {
-    background: linear-gradient(120deg, #f80101, #730101);
+    background: linear-gradient(120deg, var(--color-wrong), var(--color-wrong-dark));
     color: var(--color-background);
   }
 

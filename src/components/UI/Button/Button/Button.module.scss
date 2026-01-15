@@ -1,7 +1,8 @@
 @use '../../../../styles/breakpoints' as *;
+@use './variant' as variant;
 
 .root {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 0 var(--spacing-lg);
   font-size: var(--font-size-sm);
   border: none;
   width: 100%;
@@ -11,21 +12,16 @@
   transition: all 0.2s ease;
 
   &.primaryVariant {
-    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
-    color: var(--color-background);
-    box-shadow: 0 4px 12px var(--color-shadow);
-    font-weight: bold;
+    @include variant.data-gradient;
   }
 
   &.secondaryVariant {
-    border: 1px solid var(--color-primary-light);
-    background: var(--color-background);
-    color: var(--color-primary);
+    @include variant.data-appearance;
   }
 
   &:hover {
-    transform: translateY(-2px) scale(1.02);
     box-shadow: 0 4px 12px var(--color-shadow);
+    transform: translateY(-2px) scale(1.02);
   }
 
   &:active {
@@ -36,12 +32,5 @@
   &:disabled {
     pointer-events: none;
     background: var(--color-text-secondary-light);
-  }
-}
-
-@include respond(md) {
-  .root {
-    padding: var(--spacing-md) var(--spacing-xl);
-    font-size: var(--font-size-md);
   }
 }

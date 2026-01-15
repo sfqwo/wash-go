@@ -12,12 +12,12 @@ export type TVariant = (typeof Variants)[keyof typeof Variants];
 
 export type TButtonPrimary<T extends TAsProps = "button"> = {
   variant: typeof Variants.Primary;
-  gradient?: "blueRadial" | "pinkRadial" | "greenRadial";
+  gradient?: "blueRadial" | "redRadial";
 } & TBaseButtonProps<T>;
 
 export type TButtonSecondary<T extends TAsProps = "button"> = {
   variant: typeof Variants.Secondary;
-  appearance?: "simple" | "outlined" | "text";
+  appearance?: "outlined" | "text";
 } & TBaseButtonProps<T>;
 
 export type TButtonVariants<T extends TAsProps> =
