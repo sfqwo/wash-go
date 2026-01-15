@@ -1,8 +1,12 @@
 "use client";
 import clsx from "clsx";
 import { Shirt, Wind, Sparkles, Package } from "lucide-react";
+import type { FormEvent } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { EMAIL_PATTERN, PHONE_PATTERN } from "@/components/constants";
+import { showMessage } from "@/components/Notifier/Notifier";
 
 import { Section } from "../Section";
 import { SectionTitle } from "../SectionTitle";
@@ -58,13 +62,25 @@ export const OrderForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<OrderFormData>();
+  } = useForm<OrderFormData>({ mode: "onSubmit" });
 
   const onSubmit = () => {
+    showMessage({
+      variant: "success",
+      message: "Pickup scheduled! Our team will reach out shortly.",
+    });
     reset();
   };
-  const submitHandler = () => {
-    handleSubmit(onSubmit);
+
+  const handleSubmitError = () => {
+    showMessage({
+      variant: "error",
+      message: "Please check the form details and try again.",
+    });
+  };
+
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    void handleSubmit(onSubmit, handleSubmitError)(event);
   };
 
   const buttonText = selectedService ? "Schedule Pickup" : "Please Select a Service";
@@ -73,7 +89,7 @@ export const OrderForm = () => {
     <Section id="order-form" bg="gray">
       <SectionTitle title={TITLE} subtitle={SUBTITLE} />
 
-      <form onSubmit={submitHandler} className={styles.root}>
+      <form onSubmit={handleFormSubmit} className={styles.root} noValidate>
         <div className={styles.service}>
           <h3 className={styles.label}>Select Your Service</h3>
           <div className={styles.serviceGrid}>
@@ -83,6 +99,7 @@ export const OrderForm = () => {
 
               return (
                 <button
+                  type="button"
                   key={id}
                   className={clsxService}
                   onClick={handleClick}
@@ -106,8 +123,9 @@ export const OrderForm = () => {
               isError: !!errors?.name?.message,
               error: errors?.name?.message,
             }}
+            required
             type="text"
-            {...register("name", { required: "Name is required" })}
+            {...register("name", { required: "Name" })}
           />
 
           <Field
@@ -118,10 +136,11 @@ export const OrderForm = () => {
               isError: !!errors?.email?.message,
               error: errors?.email?.message,
             }}
+            required
             {...register("email", {
-              required: "Email is required",
+              required: "E-mail",
               pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                value: EMAIL_PATTERN,
                 message: "Invalid email address",
               },
             })}
@@ -137,10 +156,11 @@ export const OrderForm = () => {
               isError: !!errors?.phone?.message,
               error: errors?.phone?.message,
             }}
+            required
             {...register("phone", {
-              required: "Phone number is required",
+              required: "Phone number",
               pattern: {
-                value: /^[\d\s\-\(\)]+$/,
+                value: PHONE_PATTERN,
                 message: "Invalid phone number",
               },
             })}
@@ -149,12 +169,13 @@ export const OrderForm = () => {
           <Field
             id="address"
             type="text"
+            required
             label={{
               text: "Address",
               isError: !!errors?.address?.message,
               error: errors?.address?.message,
             }}
-            {...register("address", { required: "Address is required" })}
+            {...register("address", { required: "Address" })}
           />
         </div>
 
@@ -168,22 +189,24 @@ export const OrderForm = () => {
               isError: !!errors?.pickupDate?.message,
               error: errors?.pickupDate?.message,
             }}
+            required
             type="date"
-            {...register("pickupDate", { required: "Pickup date is required" })}
+            {...register("pickupDate", { required: "Pickup date" })}
           />
 
           <Select
             id="pickupTime"
             label="Preferred Time"
             options={pickupOptions}
-            {...register("pickupTime", { required: "Pickup time is required" })}
+            required
+            {...register("pickupTime", { required: "Preferred Time" })}
           />
         </div>
 
         <div className={styles.row}>
           <Field
             tag="textarea"
-            label="Special instruction (optional)"
+            label="Special instruction"
             id="instructions"
             placeholder="Any special care instructions or notes for our team..."
             {...register("instructions")}

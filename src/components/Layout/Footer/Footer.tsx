@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
+import { EMAIL_PATTERN } from "@/components/constants";
+import { showMessage } from "@/components/Notifier/Notifier";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/UI/Button";
 import { Field } from "@/components/UI/Form";
@@ -33,9 +35,26 @@ export function Footer() {
   });
 
   const handleNewsletterSubmit = async (values: NewsletterFormValues) => {
-    await subscribeToNewsletter(values);
-    reset({ email: "" }, { keepIsSubmitted: true });
-    // Connect the actual API call here.
+    try {
+      await subscribeToNewsletter(values);
+      reset({ email: "" }, { keepIsSubmitted: true });
+      showMessage({
+        variant: "success",
+        message: "Thanks for subscribing! Check your inbox soon.",
+      });
+    } catch {
+      showMessage({
+        variant: "error",
+        message: "Subscription failed. Please try again later.",
+      });
+    }
+  };
+
+  const handleNewsletterError = () => {
+    showMessage({
+      variant: "error",
+      message: "Please provide a valid email address.",
+    });
   };
 
   const emailLabel = errors.email
@@ -104,7 +123,7 @@ export function Footer() {
             className={styles.columnForm}
             noValidate
             onSubmit={(event) => {
-              void handleSubmit(handleNewsletterSubmit)(event);
+              void handleSubmit(handleNewsletterSubmit, handleNewsletterError)(event);
             }}
           >
             <Field
@@ -116,7 +135,7 @@ export function Footer() {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  value: EMAIL_PATTERN,
                   message: "Enter a valid email address",
                 },
               })}
@@ -132,7 +151,7 @@ export function Footer() {
           </form>
           {isSubmitSuccessful && (
             <p className={styles.successMessage} role="status">
-              Thanks for subscribing! Check your inbox soon.
+              We just sent you a confirmation email.
             </p>
           )}
         </div>

@@ -1,8 +1,12 @@
 "use client";
+import { DialogClose } from "@radix-ui/react-dialog";
 import clsx from "clsx";
 import { Check } from "lucide-react";
 import type { FormEvent } from "react";
 import { useForm } from "react-hook-form";
+
+import { EMAIL_PATTERN } from "@/components/constants";
+import { showMessage } from "@/components/Notifier/Notifier";
 
 import { Section } from "../Section";
 import { SectionTitle } from "../SectionTitle";
@@ -91,10 +95,22 @@ const PricingItemModalContent = () => {
   });
 
   const onSubmit = () => {
+    showMessage({
+      variant: "success",
+      message: "Thanks! We'll help you choose the best plan.",
+    });
     reset();
   };
+
+  const onError = () => {
+    showMessage({
+      variant: "error",
+      message: "Please complete the form before submitting.",
+    });
+  };
+
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-    void handleSubmit(onSubmit)(event);
+    void handleSubmit(onSubmit, onError)(event);
   };
 
   return (
@@ -120,7 +136,7 @@ const PricingItemModalContent = () => {
         {...register("email", {
           required: "Email is required",
           pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            value: EMAIL_PATTERN,
             message: "Invalid email address",
           },
         })}
@@ -136,7 +152,9 @@ const PricingItemModalContent = () => {
         })}
       />
 
-      <Button variant="primary" type="submit" disabled={!isValid}>Send</Button>
+      <DialogClose asChild>
+        <Button variant="primary" type="submit" disabled={!isValid}>Send</Button>
+      </DialogClose>
     </form>
   );
 };

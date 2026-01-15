@@ -1,0 +1,130 @@
+@use "../../styles/breakpoints" as *;
+
+.ToastViewport {
+  --viewport-padding-x: var(--spacing-md);
+  --viewport-padding-y: var(--spacing-md);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  flex-direction: column;
+  padding: var(--viewport-padding-y) var(--viewport-padding-x);
+  gap: var(--spacing-sm);
+  width: calc(100% - 2 * var(--viewport-padding-x));
+  margin: 0;
+  list-style: none;
+  z-index: 2147483647;
+  outline: none;
+  pointer-events: none;
+}
+
+.ToastRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  pointer-events: all;
+  box-shadow: 0 10px 25px var(--color-shadow-dark);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &[data-state='open'] {
+    animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &[data-state='closed'] {
+    animation: hide 100ms ease-in;
+  }
+
+  &[data-swipe='move'] {
+    transform: translateX(var(--radix-toast-swipe-move-x));
+  }
+
+  &[data-swipe='cancel'] {
+    transform: translateX(0);
+    transition: transform 200ms ease-out;
+  }
+
+  &[data-swipe='end'] {
+    animation: swipeOut 100ms ease-out;
+  }
+}
+
+.ToastRootVariants_ {
+  &error {
+    background: linear-gradient(120deg, #f80101, #730101);
+    color: var(--color-background);
+  }
+
+  &success {
+    background: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-background);
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes swipeOut {
+  from {
+    transform: translateX(var(--radix-toast-swipe-end-x));
+  }
+
+  $to_a: 100%;
+  $to_b: var(--viewport-padding-x);
+
+  to {
+    transform: translateX(calc(#{$to_a} + #{$to_b}));
+  }
+}
+
+.ToastDescription {
+  margin: 0;
+  color: inherit;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-primary);
+  line-height: 1.4;
+  width: 100%;
+  text-align: center;
+}
+
+.ToastCloseButton {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  visibility: hidden;
+}
+
+@include respond(md) {
+  .ToastViewport {
+    width: 428px;
+  }
+}
+
+@include respond(lg) {
+  .ToastViewport {
+    --viewport-padding-y: var(--spacing-lg);
+  }
+}

@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $breakpoints: (
   sm: 640px,
   md: 768px,
@@ -5,7 +7,7 @@ $breakpoints: (
 );
 
 @mixin respond($breakpoint) {
-  $value: map-get($breakpoints, $breakpoint);
+  $value: map.get($breakpoints, $breakpoint);
 
   @if $value == null {
     @error "Breakpoint '#{$breakpoint}' is not defined.";
